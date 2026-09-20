@@ -3,7 +3,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Perfil profesional de estudiante de Medicina y técnico en ECG, MAPA y Holter.">
-  <title>João Victor | Medicina &amp; Cardiología Ambulatoria</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23123b63'/%3E%3Ctext x='32' y='42' font-family='Arial, Helvetica, sans-serif' font-weight='800' font-size='22' fill='white' text-anchor='middle'%3EJVC%3C/text%3E%3C/svg%3E">
+  <title>João Victor Cruz | Medicina &amp; Cardiología Ambulatoria</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
@@ -77,6 +78,32 @@
     }
 
     .nav-links a:hover { color: var(--blue); }
+
+    .lang-switch {
+      display: flex;
+      gap: 4px;
+      margin-left: 18px;
+      padding-left: 18px;
+      border-left: 1px solid var(--border);
+    }
+
+    .lang-btn {
+      border: 1px solid var(--border);
+      background: white;
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 800;
+      padding: 5px 9px;
+      border-radius: 7px;
+      cursor: pointer;
+      font-family: inherit;
+    }
+
+    .lang-btn.active {
+      background: var(--navy);
+      color: white;
+      border-color: var(--navy);
+    }
 
     /* HERO */
     .hero {
@@ -680,6 +707,102 @@
       font-style: italic;
     }
 
+    /* SALUD / WORLDOMETERS */
+    .worldo-card {
+      position: relative;
+      max-width: 640px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 32px;
+    }
+
+    .worldo-live-badge {
+      position: absolute;
+      top: 22px;
+      right: 22px;
+      background: #fde8e8;
+      color: #c0392b;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: .5px;
+      padding: 5px 10px;
+      border-radius: 999px;
+    }
+
+    .worldo-card h3 { color: var(--navy); font-size: 19px; margin-bottom: 8px; }
+    .worldo-card p { color: var(--muted); font-size: 14px; margin-bottom: 20px; }
+
+    .worldo-source {
+      margin-top: 16px;
+      font-size: 12px;
+      color: var(--muted);
+      max-width: 640px;
+    }
+
+    /* DRAG & DROP + ÍCONE (certificados y experiencia) */
+    .drag-handle {
+      display: none;
+      position: absolute;
+      top: 14px;
+      left: 14px;
+      font-size: 16px;
+      line-height: 1;
+      color: var(--muted);
+      cursor: grab;
+      user-select: none;
+    }
+
+    body.edit-mode .drag-handle { display: block; }
+    body.edit-mode .cert-card,
+    body.edit-mode .experience-box { cursor: grab; }
+
+    .icon-toggle-btn {
+      display: none;
+      position: absolute;
+      top: 14px;
+      right: 48px;
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      border: none;
+      background: var(--light-blue);
+      color: var(--blue);
+      font-size: 13px;
+      cursor: pointer;
+    }
+
+    body.edit-mode .icon-toggle-btn { display: block; }
+
+    .cert-card.dragging,
+    .experience-box.dragging { opacity: .35; }
+
+    .cert-card.drag-over,
+    .experience-box.drag-over {
+      outline: 2px dashed var(--blue);
+      outline-offset: 3px;
+    }
+
+    .experience-box { position: relative; margin-bottom: 18px; }
+    .exp-delete {
+      display: none;
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      border: none;
+      background: #fde8e8;
+      color: #c0392b;
+      font-weight: 800;
+      font-size: 15px;
+      line-height: 1;
+      cursor: pointer;
+    }
+
+    body.edit-mode .exp-delete { display: block; }
+
     /* RESPONSIVE */
     @media (max-width: 800px) {
       .nav-links { display: none; }
@@ -703,14 +826,20 @@
 
   <nav>
     <div class="container nav-inner">
-      <a href="#" class="logo">JOÃO <span>VICTOR</span></a>
+      <a href="#" class="logo">JOÃO <span>VICTOR CRUZ</span></a>
       <div class="nav-links">
-        <a href="#sobre">Sobre mí</a>
-        <a href="#areas">Áreas</a>
-        <a href="#formacion">Formación</a>
-        <a href="#certificados">Certificados</a>
-        <a href="#experiencia">Experiencia</a>
-        <a href="#contacto">Contacto</a>
+        <a href="#sobre" data-key="nav-sobre">Sobre mí</a>
+        <a href="#areas" data-key="nav-areas">Áreas</a>
+        <a href="#formacion" data-key="nav-formacion">Formación</a>
+        <a href="#certificados" data-key="nav-certificados">Certificados</a>
+        <a href="#experiencia" data-key="nav-experiencia">Experiencia</a>
+        <a href="#salud" data-key="nav-salud">Salud</a>
+        <a href="#contacto" data-key="nav-contacto">Contacto</a>
+      </div>
+      <div class="lang-switch">
+        <button type="button" class="lang-btn active" data-lang="es">ES</button>
+        <button type="button" class="lang-btn" data-lang="pt">PT</button>
+        <button type="button" class="lang-btn" data-lang="en">EN</button>
       </div>
     </div>
   </nav>
@@ -734,7 +863,7 @@
           <div class="hero-buttons">
             <a class="btn btn-primary" href="#contacto" data-key="hero-btn-contact">Contactarme →</a>
             <span class="cv-row">
-              <a class="btn btn-secondary" href="cv.pdf" target="_blank" data-key="hero-btn-cv" data-href-key="cv-hero">Descargar CV</a>
+              <a class="btn btn-secondary" href="cv.pdf" data-key="hero-btn-cv" data-href-key="cv-hero">Descargar CV</a>
               <button type="button" class="href-edit-btn" data-for="cv-hero" title="Cambiar el archivo/enlace del CV">🔗</button>
             </span>
           </div>
@@ -903,7 +1032,7 @@
         <p class="section-intro" data-key="cert-intro">
           Cursos, certificaciones y congresos a los que asistí.</p>
 
-        <div class="cards" id="certList"><article class="card cert-card"><button type="button" class="cert-delete" title="Eliminar" data-i="0">×</button><div class="card-icon">🏅</div><h3 class="cert-title" data-i="0" data-f="title">Transtorno del Ritmo - FA</h3><p class="cert-place" data-i="0" data-f="place">ICBA</p><div class="cert-date" data-i="0" data-f="date">2026</div></article><article class="card cert-card"><button type="button" class="cert-delete" title="Eliminar" data-i="1">×</button><div class="card-icon">🏅</div><h3 class="cert-title" data-i="1" data-f="title">Técnico en ECG, MAPA y Holter</h3><p class="cert-place" data-i="1" data-f="place">Centro Medico Escuela</p><div class="cert-date" data-i="1" data-f="date">2026</div></article><article class="card cert-card"><button type="button" class="cert-delete" title="Eliminar" data-i="2">×</button><div class="card-icon">🏅</div><h3 class="cert-title" data-i="2" data-f="title">Congreso Imágenes - Cardio</h3><p class="cert-place" data-i="2" data-f="place">SAC</p><div class="cert-date" data-i="2" data-f="date">2026</div></article><article class="card cert-card"><button type="button" class="cert-delete" title="Eliminar" data-i="3">×</button><div class="card-icon">🏅</div><h3 class="cert-title" data-i="3" data-f="title">Congreso de Cardiología&nbsp;</h3><p class="cert-place" data-i="3" data-f="place">SAC</p><div class="cert-date" data-i="3" data-f="date">2026</div></article><article class="card cert-card"><button type="button" class="cert-delete" title="Eliminar" data-i="4">×</button><div class="card-icon">🏅</div><h3 class="cert-title" data-i="4" data-f="title">Congreso Argentino de Salud</h3><p class="cert-place" data-i="4" data-f="place">ACAMI</p><div class="cert-date" data-i="4" data-f="date">2025</div></article><article class="card cert-card"><button type="button" class="cert-delete" title="Eliminar" data-i="5">×</button><div class="card-icon">🏅</div><h3 class="cert-title" data-i="5" data-f="title">Congreso de Infectología</h3><p class="cert-place" data-i="5" data-f="place">SADI</p><div class="cert-date" data-i="5" data-f="date">2023</div></article></div>
+        <div class="cards" id="certList"></div>
 
         <button type="button" class="add-cert-btn" id="addCertBtn">+ Agregar certificado o congreso</button>
       </div>
@@ -919,28 +1048,40 @@
           Mi trayectoria profesional.
         </p>
 
-        <div class="experience-box">
+        <div id="expList"></div>
 
-          <div class="experience-top">
-            <div>
-              <h3 data-key="exp-role">Practicante</h3>
-              <div class="experience-company" data-key="exp-company">
-                Hospital Gandulfo</div>
-            </div>
+        <button type="button" class="add-cert-btn" id="addExpBtn">+ Agregar experiencia</button>
+      </div>
+    </section>
 
-            <div class="experience-date" data-key="exp-date">
-              2026 — Actualidad
-            </div>
-          </div>
+    <!-- FUENTE EXTERNA: WORLDOMETERS -->
+    <section id="salud" class="areas">
+      <div class="container">
+        <div class="section-label" data-key="salud-label">Dato del día</div>
+        <h2 data-key="salud-title">Salud mundial en vivo</h2>
 
-          <ul>
-            <li data-key="exp-li1">Atendimento a pacientes hospitalizados</li>
-            <li data-key="exp-li2">Shockroom</li>
-            <li data-key="exp-li3">Aprendizaje con médicos expertos&nbsp;</li>
-            <li data-key="exp-li4">Desarrollo de profesional</li>
-          </ul>
+        <p class="section-intro" data-key="salud-intro">
+          Esta sección no la genero yo: apunta directamente a la categoría "Health" de Worldometers.info,
+          un sitio independiente que actualiza sus contadores de salud en tiempo real.
+        </p>
 
+        <div class="worldo-card">
+          <div class="worldo-live-badge">🔴 EN VIVO</div>
+          <div class="card-icon">🌍</div>
+          <h3 data-key="salud-card-title">Estadísticas de salud del mundo, hoy</h3>
+          <p data-key="salud-card-desc">
+            Nacimientos, muertes, enfermedades, vacunas y más — contadores que se actualizan
+            segundo a segundo directamente en el sitio original.
+          </p>
+          <a class="btn btn-primary" href="https://www.worldometers.info/" data-key="salud-link">
+            Ver los datos en vivo en Worldometers.info →
+          </a>
         </div>
+
+        <p class="worldo-source" data-key="salud-source">
+          Fuente: Worldometers.info. Los datos mostrados allí no son producidos ni verificados por mí;
+          se muestran únicamente como referencia.
+        </p>
       </div>
     </section>
 
@@ -968,13 +1109,13 @@
             <span class="contact-icon">✉</span>dr.joaovictor@icloud.com</a>
 
           <div class="contact-link-row">
-            <a class="contact-link" href="https://www.linkedin.com/in/jvcruzs/" target="_blank" data-key="contact-linkedin" data-href-key="linkedin">
+            <a class="contact-link" href="https://www.linkedin.com/in/jvcruzs/" data-key="contact-linkedin" data-href-key="linkedin">
               <span class="contact-icon">in</span>Linkedin</a>
             <button type="button" class="href-edit-btn" data-for="linkedin" title="Cambiar el enlace de LinkedIn">🔗</button>
           </div>
 
           <div class="contact-link-row">
-            <a class="contact-link" href="https://wa.me/549XXXXXXXXXX" target="_blank" data-key="contact-whatsapp" data-href-key="whatsapp">
+            <a class="contact-link" href="https://wa.me/549XXXXXXXXXX" data-key="contact-whatsapp" data-href-key="whatsapp">
               <span class="contact-icon">↗</span>+54 11 3494 0001</a>
             <button type="button" class="href-edit-btn" data-for="whatsapp" title="Cambiar el número/enlace de WhatsApp">🔗</button>
           </div>
@@ -992,7 +1133,7 @@
   </main>
 
   <footer>
-    <span data-key="footer-text">© 2026 João Victor · Medicina &amp; Cardiología Ambulatoria</span><span id="secretIcon" title=" ">·</span>
+    <span data-key="footer-text">© 2026 João Victor Cruz · Medicina &amp; Cardiología Ambulatoria</span><span id="secretIcon" title=" ">·</span>
   </footer>
 
   
@@ -1101,27 +1242,28 @@
     var CERT_KEY = 'site:certs';
     var certList = document.getElementById('certList');
 
-    function defaultCertsFromDOM() {
-      return Array.from(certList.querySelectorAll('.cert-card')).map(function (c) {
-        return {
-          title: c.querySelector('.cert-title').textContent.trim(),
-          place: c.querySelector('.cert-place').textContent.trim(),
-          date: c.querySelector('.cert-date').textContent.trim()
-        };
-      });
-    }
+    var INITIAL_CERTS = [
+      { icon: '🏅', title: 'Transtorno del Ritmo - FA', place: 'ICBA', date: '2026' },
+      { icon: '🏅', title: 'Técnico en ECG, MAPA y Holter', place: 'Centro Medico Escuela', date: '2026' },
+      { icon: '🏅', title: 'Congreso Imágenes - Cardio', place: 'SAC', date: '2026' },
+      { icon: '🏅', title: 'Congreso de Cardiología', place: 'SAC', date: '2026' },
+      { icon: '🏅', title: 'Congreso Argentino de Salud', place: 'ACAMI', date: '2025' },
+      { icon: '🏅', title: 'Congreso de Infectología', place: 'SADI', date: '2023' }
+    ];
 
     function loadCerts() {
       var raw = localStorage.getItem(CERT_KEY);
       if (raw) {
         try { return JSON.parse(raw); } catch (e) {}
       }
-      return defaultCertsFromDOM();
+      return INITIAL_CERTS.map(function (c) { return Object.assign({}, c); });
     }
 
     function saveCerts(arr) {
       localStorage.setItem(CERT_KEY, JSON.stringify(arr));
     }
+
+    var ICON_CHOICES = ['🏅', '📚'];
 
     function renderCerts(arr) {
       certList.innerHTML = '';
@@ -1134,9 +1276,13 @@
       arr.forEach(function (c, i) {
         var card = document.createElement('article');
         card.className = 'card cert-card';
+        card.setAttribute('data-i', i);
+        card.draggable = editMode;
         card.innerHTML =
+          '<span class="drag-handle" title="Arrastrá para reordenar">⠿⠿</span>' +
+          '<button type="button" class="icon-toggle-btn" data-i="' + i + '" title="Cambiar ícono">🔁</button>' +
           '<button type="button" class="cert-delete" title="Eliminar" data-i="' + i + '">×</button>' +
-          '<div class="card-icon">🏅</div>' +
+          '<div class="card-icon">' + escapeHtml(c.icon || '🏅') + '</div>' +
           '<h3 class="cert-title" data-i="' + i + '" data-f="title">' + escapeHtml(c.title) + '</h3>' +
           '<p class="cert-place" data-i="' + i + '" data-f="place">' + escapeHtml(c.place) + '</p>' +
           '<div class="cert-date" data-i="' + i + '" data-f="date">' + escapeHtml(c.date) + '</div>';
@@ -1149,6 +1295,9 @@
       certList.querySelectorAll('[data-f]').forEach(function (el) {
         el.contentEditable = on ? 'true' : 'false';
       });
+      certList.querySelectorAll('.cert-card').forEach(function (el) {
+        el.draggable = on;
+      });
     }
 
     certList.addEventListener('click', function (e) {
@@ -1158,6 +1307,14 @@
         arr.splice(i, 1);
         saveCerts(arr);
         renderCerts(arr);
+      }
+      if (e.target.classList.contains('icon-toggle-btn')) {
+        var j = +e.target.getAttribute('data-i');
+        var arr2 = loadCerts();
+        var current = ICON_CHOICES.indexOf(arr2[j].icon);
+        arr2[j].icon = ICON_CHOICES[(current + 1) % ICON_CHOICES.length];
+        saveCerts(arr2);
+        renderCerts(arr2);
       }
     });
 
@@ -1173,11 +1330,189 @@
       }
     });
 
-    document.getElementById('addCertBtn').addEventListener('click', function () {
+    /* arrastrar para reordenar (certificados) */
+    var certDragIndex = null;
+
+    certList.addEventListener('dragstart', function (e) {
+      var card = e.target.closest('.cert-card');
+      if (!card) return;
+      certDragIndex = +card.getAttribute('data-i');
+      card.classList.add('dragging');
+      e.dataTransfer.effectAllowed = 'move';
+    });
+
+    certList.addEventListener('dragend', function (e) {
+      var card = e.target.closest('.cert-card');
+      if (card) card.classList.remove('dragging');
+      certList.querySelectorAll('.drag-over').forEach(function (n) { n.classList.remove('drag-over'); });
+    });
+
+    certList.addEventListener('dragover', function (e) {
+      var card = e.target.closest('.cert-card');
+      if (!card || certDragIndex === null) return;
+      e.preventDefault();
+      certList.querySelectorAll('.drag-over').forEach(function (n) { n.classList.remove('drag-over'); });
+      card.classList.add('drag-over');
+    });
+
+    certList.addEventListener('drop', function (e) {
+      var card = e.target.closest('.cert-card');
+      if (!card || certDragIndex === null) return;
+      e.preventDefault();
+      var targetIndex = +card.getAttribute('data-i');
       var arr = loadCerts();
-      arr.push({ title: 'Nombre del certificado o congreso', place: 'Institución / organizador', date: 'Año' });
+      var moved = arr.splice(certDragIndex, 1)[0];
+      arr.splice(targetIndex, 0, moved);
+      certDragIndex = null;
       saveCerts(arr);
       renderCerts(arr);
+    });
+
+    document.getElementById('addCertBtn').addEventListener('click', function () {
+      var arr = loadCerts();
+      arr.push({ icon: '🏅', title: 'Nombre del certificado o congreso', place: 'Institución / organizador', date: 'Año' });
+      saveCerts(arr);
+      renderCerts(arr);
+    });
+
+    /* ---------- experiencia profesional ---------- */
+    var EXP_KEY = 'site:exps';
+    var expList = document.getElementById('expList');
+
+    var INITIAL_EXPS = [
+      {
+        role: 'Practicante',
+        company: 'Hospital Gandulfo',
+        date: '2026 — Actualidad',
+        li1: 'Atendimento a pacientes hospitalizados',
+        li2: 'Shockroom',
+        li3: 'Aprendizaje con médicos expertos',
+        li4: 'Desarrollo de profesional'
+      }
+    ];
+
+    function loadExps() {
+      var raw = localStorage.getItem(EXP_KEY);
+      if (raw) {
+        try { return JSON.parse(raw); } catch (e) {}
+      }
+      return INITIAL_EXPS.map(function (x) { return Object.assign({}, x); });
+    }
+
+    function saveExps(arr) {
+      localStorage.setItem(EXP_KEY, JSON.stringify(arr));
+    }
+
+    function renderExps(arr) {
+      expList.innerHTML = '';
+      arr.forEach(function (x, i) {
+        var box = document.createElement('div');
+        box.className = 'experience-box';
+        box.setAttribute('data-i', i);
+        box.draggable = editMode;
+        box.innerHTML =
+          '<span class="drag-handle" title="Arrastrá para reordenar">⠿⠿</span>' +
+          '<button type="button" class="exp-delete" title="Eliminar" data-i="' + i + '">×</button>' +
+          '<div class="experience-top">' +
+            '<div>' +
+              '<h3 class="exp-field" data-i="' + i + '" data-f="role">' + escapeHtml(x.role) + '</h3>' +
+              '<div class="experience-company exp-field" data-i="' + i + '" data-f="company">' + escapeHtml(x.company) + '</div>' +
+            '</div>' +
+            '<div class="experience-date exp-field" data-i="' + i + '" data-f="date">' + escapeHtml(x.date) + '</div>' +
+          '</div>' +
+          '<ul>' +
+            '<li class="exp-field" data-i="' + i + '" data-f="li1">' + escapeHtml(x.li1) + '</li>' +
+            '<li class="exp-field" data-i="' + i + '" data-f="li2">' + escapeHtml(x.li2) + '</li>' +
+            '<li class="exp-field" data-i="' + i + '" data-f="li3">' + escapeHtml(x.li3) + '</li>' +
+            '<li class="exp-field" data-i="' + i + '" data-f="li4">' + escapeHtml(x.li4) + '</li>' +
+          '</ul>';
+        expList.appendChild(box);
+      });
+      setExpEditable(editMode);
+    }
+
+    function setExpEditable(on) {
+      expList.querySelectorAll('[data-f]').forEach(function (el) {
+        el.contentEditable = on ? 'true' : 'false';
+      });
+      expList.querySelectorAll('.experience-box').forEach(function (el) {
+        el.draggable = on;
+      });
+    }
+
+    expList.addEventListener('click', function (e) {
+      if (e.target.classList.contains('exp-delete')) {
+        var i = +e.target.getAttribute('data-i');
+        var arr = loadExps();
+        arr.splice(i, 1);
+        saveExps(arr);
+        renderExps(arr);
+      }
+    });
+
+    expList.addEventListener('input', function (e) {
+      var f = e.target.getAttribute && e.target.getAttribute('data-f');
+      if (f) {
+        var i = +e.target.getAttribute('data-i');
+        var arr = loadExps();
+        if (arr[i]) {
+          arr[i][f] = e.target.textContent;
+          saveExps(arr);
+        }
+      }
+    });
+
+    /* arrastrar para reordenar (experiencia) */
+    var expDragIndex = null;
+
+    expList.addEventListener('dragstart', function (e) {
+      var box = e.target.closest('.experience-box');
+      if (!box) return;
+      expDragIndex = +box.getAttribute('data-i');
+      box.classList.add('dragging');
+      e.dataTransfer.effectAllowed = 'move';
+    });
+
+    expList.addEventListener('dragend', function (e) {
+      var box = e.target.closest('.experience-box');
+      if (box) box.classList.remove('dragging');
+      expList.querySelectorAll('.drag-over').forEach(function (n) { n.classList.remove('drag-over'); });
+    });
+
+    expList.addEventListener('dragover', function (e) {
+      var box = e.target.closest('.experience-box');
+      if (!box || expDragIndex === null) return;
+      e.preventDefault();
+      expList.querySelectorAll('.drag-over').forEach(function (n) { n.classList.remove('drag-over'); });
+      box.classList.add('drag-over');
+    });
+
+    expList.addEventListener('drop', function (e) {
+      var box = e.target.closest('.experience-box');
+      if (!box || expDragIndex === null) return;
+      e.preventDefault();
+      var targetIndex = +box.getAttribute('data-i');
+      var arr = loadExps();
+      var moved = arr.splice(expDragIndex, 1)[0];
+      arr.splice(targetIndex, 0, moved);
+      expDragIndex = null;
+      saveExps(arr);
+      renderExps(arr);
+    });
+
+    document.getElementById('addExpBtn').addEventListener('click', function () {
+      var arr = loadExps();
+      arr.push({
+        role: 'Nuevo puesto',
+        company: 'Institución',
+        date: 'Año — Actualidad',
+        li1: 'Descripción de la tarea',
+        li2: 'Descripción de la tarea',
+        li3: 'Descripción de la tarea',
+        li4: 'Descripción de la tarea'
+      });
+      saveExps(arr);
+      renderExps(arr);
     });
 
     /* ---------- candado con contraseña ---------- */
@@ -1236,6 +1571,7 @@
         el.contentEditable = on ? 'true' : 'false';
       });
       setCertEditable(on);
+      setExpEditable(on);
       editToggleBtn.textContent = on ? '✅ Finalizar edición' : '✏️ Editar página';
     }
 
@@ -1271,10 +1607,113 @@
       if (wasEditing) setEditMode(true);
     });
 
+    /* ---------- idiomas (ES es el idioma base; PT/EN traducen solo el texto de estructura) ---------- */
+    var TRANSLATIONS = {
+      pt: {
+        'nav-sobre': 'Sobre mim', 'nav-areas': 'Áreas', 'nav-formacion': 'Formação',
+        'nav-certificados': 'Certificados', 'nav-experiencia': 'Experiência',
+        'nav-salud': 'Saúde', 'nav-contacto': 'Contato',
+        'hero-eyebrow': 'Disponível para oportunidades profissionais',
+        'hero-btn-contact': 'Fale comigo →', 'hero-btn-cv': 'Baixar currículo',
+        'sobre-label': 'Perfil', 'sobre-title': 'Sobre mim',
+        'highlight-title': 'Meu perfil em poucas palavras',
+        'areas-label': 'Competências', 'areas-title': 'Áreas de formação técnica',
+        'areas-intro': 'Formação e experiência prática voltadas à realização, preparação e gestão técnica de estudos cardiológicos ambulatoriais.',
+        'card1-title': 'ECG', 'card1-sub': 'Eletrocardiografia',
+        'card1-li1': 'Preparação do paciente', 'card1-li2': 'Colocação de eletrodos',
+        'card1-li3': 'Registro eletrocardiográfico', 'card1-li4': 'Controle de qualidade técnica',
+        'card2-title': 'Holter', 'card2-sub': 'Monitoramento eletrocardiográfico',
+        'card2-li1': 'Preparação do paciente', 'card2-li2': 'Instalação do equipamento',
+        'card2-li3': 'Colocação de eletrodos', 'card2-li4': 'Retirada e download do registro',
+        'card3-title': 'MAPA', 'card3-sub': 'Monitoramento ambulatorial de pressão arterial',
+        'card3-li1': 'Instalação do equipamento', 'card3-li2': 'Orientação ao paciente',
+        'card3-li3': 'Configuração do estudo', 'card3-li4': 'Download e organização dos registros',
+        'formacion-label': 'Trajetória', 'formacion-title': 'Formação',
+        'cert-label': 'Atualização', 'cert-title': 'Certificados e congressos',
+        'cert-intro': 'Cursos, certificações e congressos que participei.',
+        'exp-label': 'Experiência', 'exp-title': 'Experiência profissional',
+        'exp-intro': 'Minha trajetória profissional.',
+        'salud-label': 'Dado do dia', 'salud-title': 'Saúde mundial ao vivo',
+        'salud-intro': 'Esta seção não é gerada por mim: aponta diretamente para a categoria "Health" do Worldometers.info, um site independente que atualiza seus contadores de saúde em tempo real.',
+        'salud-card-title': 'Estatísticas de saúde do mundo, hoje',
+        'salud-card-desc': 'Nascimentos, mortes, doenças, vacinas e mais — contadores atualizados segundo a segundo diretamente no site original.',
+        'salud-link': 'Ver os dados ao vivo no Worldometers.info →',
+        'salud-source': 'Fonte: Worldometers.info. Os dados mostrados ali não são produzidos nem verificados por mim; são exibidos apenas como referência.',
+        'contact-label': 'Contato', 'contact-title': 'Obrigado pela visita',
+        'contact-intro': 'Um grande abraço.', 'contact-btn-cv': 'Baixar currículo completo',
+        'footer-text': '© 2026 João Victor Cruz · Medicina &amp; Cardiologia Ambulatorial'
+      },
+      en: {
+        'nav-sobre': 'About', 'nav-areas': 'Areas', 'nav-formacion': 'Education',
+        'nav-certificados': 'Certificates', 'nav-experiencia': 'Experience',
+        'nav-salud': 'Health', 'nav-contacto': 'Contact',
+        'hero-eyebrow': 'Available for professional opportunities',
+        'hero-btn-contact': 'Contact me →', 'hero-btn-cv': 'Download CV',
+        'sobre-label': 'Profile', 'sobre-title': 'About me',
+        'highlight-title': 'My profile in a nutshell',
+        'areas-label': 'Skills', 'areas-title': 'Technical training areas',
+        'areas-intro': 'Training and hands-on experience focused on performing, preparing and technically managing outpatient cardiology studies.',
+        'card1-title': 'ECG', 'card1-sub': 'Electrocardiography',
+        'card1-li1': 'Patient preparation', 'card1-li2': 'Electrode placement',
+        'card1-li3': 'Electrocardiographic recording', 'card1-li4': 'Technical quality control',
+        'card2-title': 'Holter', 'card2-sub': 'Electrocardiographic monitoring',
+        'card2-li1': 'Patient preparation', 'card2-li2': 'Device setup',
+        'card2-li3': 'Electrode placement', 'card2-li4': 'Removal and download of the recording',
+        'card3-title': 'ABPM', 'card3-sub': 'Ambulatory blood pressure monitoring',
+        'card3-li1': 'Device setup', 'card3-li2': 'Patient guidance',
+        'card3-li3': 'Study configuration', 'card3-li4': 'Download and organization of records',
+        'formacion-label': 'Path', 'formacion-title': 'Education',
+        'cert-label': 'Update', 'cert-title': 'Certificates and conferences',
+        'cert-intro': 'Courses, certifications and conferences I have attended.',
+        'exp-label': 'Experience', 'exp-title': 'Professional experience',
+        'exp-intro': 'My professional path.',
+        'salud-label': "Today's data", 'salud-title': 'World health, live',
+        'salud-intro': 'This section is not generated by me: it points directly to the "Health" category on Worldometers.info, an independent site that updates its health counters in real time.',
+        'salud-card-title': "The world's health statistics, today",
+        'salud-card-desc': 'Births, deaths, diseases, vaccinations and more — counters updated second by second directly on the original site.',
+        'salud-link': 'See the live data on Worldometers.info →',
+        'salud-source': 'Source: Worldometers.info. The data shown there is not produced or verified by me; it is shown for reference only.',
+        'contact-label': 'Contact', 'contact-title': 'Thanks for visiting',
+        'contact-intro': 'A big hug.', 'contact-btn-cv': 'Download full CV',
+        'footer-text': '© 2026 João Victor Cruz · Medicine &amp; Ambulatory Cardiology'
+      }
+    };
+
+    var ORIGINAL_ES = {};
+
+    function captureOriginalEs() {
+      Object.keys(TRANSLATIONS.pt).forEach(function (key) {
+        var el = document.querySelector('[data-key="' + key + '"]');
+        if (el) ORIGINAL_ES[key] = el.innerHTML;
+      });
+    }
+
+    function applyLanguage(lang) {
+      if (!TRANSLATIONS[lang] && lang !== 'es') lang = 'es';
+      document.documentElement.lang = lang;
+      var dict = TRANSLATIONS[lang];
+      Object.keys(ORIGINAL_ES).forEach(function (key) {
+        var el = document.querySelector('[data-key="' + key + '"]');
+        if (!el) return;
+        el.innerHTML = dict ? dict[key] : ORIGINAL_ES[key];
+      });
+      document.querySelectorAll('.lang-btn').forEach(function (b) {
+        b.classList.toggle('active', b.getAttribute('data-lang') === lang);
+      });
+      localStorage.setItem('site:lang', lang);
+    }
+
+    document.querySelectorAll('.lang-btn').forEach(function (b) {
+      b.addEventListener('click', function () { applyLanguage(b.getAttribute('data-lang')); });
+    });
+
     /* ---------- inicialización ---------- */
     applySavedTexts();
     applySavedHrefs();
+    captureOriginalEs();
     renderCerts(loadCerts());
+    renderExps(loadExps());
+    applyLanguage(localStorage.getItem('site:lang') || 'es');
   })();
   </script>
 
