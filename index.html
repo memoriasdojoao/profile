@@ -1153,7 +1153,7 @@
         <p class="section-intro" data-key="cert-intro">
           Cursos, certificaciones y congresos a los que asistí.</p>
 
-        <div class="cards" id="certList"></div>
+        <div class="cards" id="certList"><article class="card cert-card" data-i="0" draggable="false"><span class="drag-handle" title="Arrastrá para reordenar">⠿⠿</span><button type="button" class="icon-toggle-btn" data-i="0" title="Cambiar ícono">🔁</button><button type="button" class="cert-delete" title="Eliminar" data-i="0">×</button><div class="card-icon">📚</div><h3 class="cert-title" data-i="0" data-f="title">Técnico en ECG, MAPA y Holter</h3><p class="cert-place" data-i="0" data-f="place">Centro Medico Escuela</p><div class="cert-date" data-i="0" data-f="date">2026</div></article><article class="card cert-card" data-i="1" draggable="false"><span class="drag-handle" title="Arrastrá para reordenar">⠿⠿</span><button type="button" class="icon-toggle-btn" data-i="1" title="Cambiar ícono">🔁</button><button type="button" class="cert-delete" title="Eliminar" data-i="1">×</button><div class="card-icon">📚</div><h3 class="cert-title" data-i="1" data-f="title">Transtorno del Ritmo - FA</h3><p class="cert-place" data-i="1" data-f="place">ICBA</p><div class="cert-date" data-i="1" data-f="date">2026</div></article><article class="card cert-card" data-i="2" draggable="false"><span class="drag-handle" title="Arrastrá para reordenar">⠿⠿</span><button type="button" class="icon-toggle-btn" data-i="2" title="Cambiar ícono">🔁</button><button type="button" class="cert-delete" title="Eliminar" data-i="2">×</button><div class="card-icon">🏅</div><h3 class="cert-title" data-i="2" data-f="title">Congreso de Cardiología&nbsp;</h3><p class="cert-place" data-i="2" data-f="place">SAC</p><div class="cert-date" data-i="2" data-f="date">2026</div></article><article class="card cert-card" data-i="3" draggable="false"><span class="drag-handle" title="Arrastrá para reordenar">⠿⠿</span><button type="button" class="icon-toggle-btn" data-i="3" title="Cambiar ícono">🔁</button><button type="button" class="cert-delete" title="Eliminar" data-i="3">×</button><div class="card-icon">🏅</div><h3 class="cert-title" data-i="3" data-f="title">Congreso Imágenes - Cardio</h3><p class="cert-place" data-i="3" data-f="place">SAC</p><div class="cert-date" data-i="3" data-f="date">2026</div></article><article class="card cert-card" data-i="4" draggable="false"><span class="drag-handle" title="Arrastrá para reordenar">⠿⠿</span><button type="button" class="icon-toggle-btn" data-i="4" title="Cambiar ícono">🔁</button><button type="button" class="cert-delete" title="Eliminar" data-i="4">×</button><div class="card-icon">🏅</div><h3 class="cert-title" data-i="4" data-f="title">Congreso Argentino de Salud</h3><p class="cert-place" data-i="4" data-f="place">ACAMI</p><div class="cert-date" data-i="4" data-f="date">2025</div></article><article class="card cert-card" data-i="5" draggable="false"><span class="drag-handle" title="Arrastrá para reordenar">⠿⠿</span><button type="button" class="icon-toggle-btn" data-i="5" title="Cambiar ícono">🔁</button><button type="button" class="cert-delete" title="Eliminar" data-i="5">×</button><div class="card-icon">🏅</div><h3 class="cert-title" data-i="5" data-f="title">Congreso de Infectología</h3><p class="cert-place" data-i="5" data-f="place">SADI</p><div class="cert-date" data-i="5" data-f="date">2023</div></article></div>
 
         <button type="button" class="add-cert-btn" id="addCertBtn">+ Agregar certificado o congreso</button>
       </div>
@@ -1169,7 +1169,7 @@
           Mi trayectoria profesional.
         </p>
 
-        <div id="expList"></div>
+        <div id="expList"><div class="experience-box" data-i="0" draggable="false"><span class="drag-handle" title="Arrastrá para reordenar">⠿⠿</span><button type="button" class="exp-delete" title="Eliminar" data-i="0">×</button><div class="experience-top"><div><h3 class="exp-field" data-i="0" data-f="role">Practicante</h3><div class="experience-company exp-field" data-i="0" data-f="company">Hospital Gandulfo</div></div><div class="experience-date exp-field" data-i="0" data-f="date">2026 — Actualidad</div></div><ul><li class="exp-field" data-i="0" data-f="li1">Atendimento a pacientes hospitalizados</li><li class="exp-field" data-i="0" data-f="li2">Shockroom</li><li class="exp-field" data-i="0" data-f="li3">Aprendizaje con médicos expertos</li><li class="exp-field" data-i="0" data-f="li4">Desarrollo de profesional</li></ul></div></div>
 
         <button type="button" class="add-cert-btn" id="addExpBtn">+ Agregar experiencia</button>
       </div>
@@ -1237,12 +1237,12 @@
         <div class="salud-counters">
           <div class="salud-counter">
             <div class="salud-counter-icon">🌍</div>
-            <div class="salud-counter-value" id="counterPopulation">–</div>
+            <div class="salud-counter-value" id="counterPopulation">8.252.437.069</div>
             <div class="salud-counter-label" data-key="salud-counter-population">Población mundial</div>
           </div>
           <div class="salud-counter">
             <div class="salud-counter-icon">👶</div>
-            <div class="salud-counter-value" id="counterBirths">–</div>
+            <div class="salud-counter-value" id="counterBirths">101.454.330</div>
             <div class="salud-counter-label" data-key="salud-counter-births">Nacimientos este año</div>
           </div>
         </div>
@@ -1251,47 +1251,47 @@
         <div class="salud-counters">
           <div class="salud-counter">
             <div class="salud-counter-icon">🕊️</div>
-            <div class="salud-counter-value" id="counterDeaths">–</div>
+            <div class="salud-counter-value" id="counterDeaths">44.001.540</div>
             <div class="salud-counter-label" data-key="salud-counter-deaths">Muertes este año</div>
           </div>
           <div class="salud-counter">
             <div class="salud-counter-icon">🏥</div>
-            <div class="salud-counter-value" id="counterCDeaths">–</div>
+            <div class="salud-counter-value" id="counterCDeaths">9.379.395</div>
             <div class="salud-counter-label" data-key="salud-counter-cdeaths">Muertes por enfermedades transmisibles este año</div>
           </div>
           <div class="salud-counter">
             <div class="salud-counter-icon">🤧</div>
-            <div class="salud-counter-value" id="counterFlu">–</div>
+            <div class="salud-counter-value" id="counterFlu">376.178</div>
             <div class="salud-counter-label" data-key="salud-counter-flu">Muertes por gripe estacional este año</div>
           </div>
           <div class="salud-counter">
             <div class="salud-counter-icon">🧒</div>
-            <div class="salud-counter-value" id="counterUnder5">–</div>
+            <div class="salud-counter-value" id="counterUnder5">5.492.213</div>
             <div class="salud-counter-label" data-key="salud-counter-under5">Muertes de niños menores de 5 años este año</div>
           </div>
           <div class="salud-counter">
             <div class="salud-counter-icon">🤰</div>
-            <div class="salud-counter-value" id="counterMaternal">–</div>
+            <div class="salud-counter-value" id="counterMaternal">223.427</div>
             <div class="salud-counter-label" data-key="salud-counter-maternal">Muertes de madres durante el parto este año</div>
           </div>
           <div class="salud-counter">
             <div class="salud-counter-icon">🎗️</div>
-            <div class="salud-counter-value" id="counterHivPeople">–</div>
+            <div class="salud-counter-value" id="counterHivPeople">47.645.931</div>
             <div class="salud-counter-label" data-key="salud-counter-hivpeople">Personas con VIH/sida</div>
           </div>
           <div class="salud-counter">
             <div class="salud-counter-icon">🎗️</div>
-            <div class="salud-counter-value" id="counterHivDeaths">–</div>
+            <div class="salud-counter-value" id="counterHivDeaths">1.214.716</div>
             <div class="salud-counter-label" data-key="salud-counter-hivdeaths">Muertes causadas por VIH/sida este año</div>
           </div>
           <div class="salud-counter">
             <div class="salud-counter-icon">🩺</div>
-            <div class="salud-counter-value" id="counterCancer">–</div>
+            <div class="salud-counter-value" id="counterCancer">5.934.280</div>
             <div class="salud-counter-label" data-key="salud-counter-cancer">Muertes causadas por cáncer este año</div>
           </div>
           <div class="salud-counter">
             <div class="salud-counter-icon">🦟</div>
-            <div class="salud-counter-value" id="counterMalaria">–</div>
+            <div class="salud-counter-value" id="counterMalaria">284.984</div>
             <div class="salud-counter-label" data-key="salud-counter-malaria">Muertes causadas por malaria este año</div>
           </div>
         </div>
@@ -1300,37 +1300,37 @@
         <div class="salud-counters">
           <div class="salud-counter">
             <div class="salud-counter-icon">🚬</div>
-            <div class="salud-counter-value" id="counterCigarettes">–</div>
+            <div class="salud-counter-value" id="counterCigarettes">13.650.984.874</div>
             <div class="salud-counter-label" data-key="salud-counter-cigarettes">Cigarrillos fumados hoy</div>
           </div>
           <div class="salud-counter">
             <div class="salud-counter-icon">🚭</div>
-            <div class="salud-counter-value" id="counterSmokingDeaths">–</div>
+            <div class="salud-counter-value" id="counterSmokingDeaths">3.612.002</div>
             <div class="salud-counter-label" data-key="salud-counter-smokingdeaths">Muertes causadas por tabaquismo este año</div>
           </div>
           <div class="salud-counter">
             <div class="salud-counter-icon">🍺</div>
-            <div class="salud-counter-value" id="counterAlcoholDeaths">–</div>
+            <div class="salud-counter-value" id="counterAlcoholDeaths">1.807.254</div>
             <div class="salud-counter-label" data-key="salud-counter-alcoholdeaths">Muertes causadas por alcohol este año</div>
           </div>
           <div class="salud-counter">
             <div class="salud-counter-icon">📉</div>
-            <div class="salud-counter-value" id="counterAbortions">–</div>
+            <div class="salud-counter-value" id="counterAbortions">32.970.377</div>
             <div class="salud-counter-label" data-key="salud-counter-abortions">Abortos este año</div>
           </div>
           <div class="salud-counter">
             <div class="salud-counter-icon">💔</div>
-            <div class="salud-counter-value" id="counterSuicides">–</div>
+            <div class="salud-counter-value" id="counterSuicides">774.928</div>
             <div class="salud-counter-label" data-key="salud-counter-suicides">Suicidios este año</div>
           </div>
           <div class="salud-counter">
             <div class="salud-counter-icon">💊</div>
-            <div class="salud-counter-value" id="counterDrugMoney">–</div>
+            <div class="salud-counter-value" id="counterDrugMoney">$289.058.433.675</div>
             <div class="salud-counter-label" data-key="salud-counter-drugmoney">Dinero gastado en drogas ilegales este año</div>
           </div>
           <div class="salud-counter">
             <div class="salud-counter-icon">🚗</div>
-            <div class="salud-counter-value" id="counterRoad">–</div>
+            <div class="salud-counter-value" id="counterRoad">975.329</div>
             <div class="salud-counter-label" data-key="salud-counter-road">Muertes por accidentes de tránsito este año</div>
           </div>
         </div>
@@ -1348,19 +1348,11 @@
     <span data-key="footer-text">© 2026 João Victor Cruz · Medicina &amp; Cardiología Ambulatoria</span><span id="secretIcon" title=" ">·</span>
   </footer>
 
-  <input type="file" id="photoInput" accept="image/*" style="display:none">
+  
 
-  <div class="edit-hint" id="editHint">
-    Estás en <strong>modo edición</strong>. Hacé click en cualquier texto para editarlo, arrastrá certificados o experiencias para reordenarlos, y usá los botones de abajo para guardar los cambios.
-    <button type="button" onclick="this.parentElement.style.display='none'">Entendido</button>
-  </div>
+  
 
-  <div class="edit-toggle-bar">
-    <button type="button" class="edit-toggle-btn secondary" id="downloadBtn">⬇️ Descargar página</button>
-    <button type="button" class="edit-toggle-btn secondary" id="resetBtn">♻️ Restaurar original</button>
-    <button type="button" class="edit-toggle-btn lock-btn" id="lockBtn">🔒 Bloquear</button>
-    <button type="button" class="edit-toggle-btn" id="editToggleBtn">✏️ Editar página</button>
-  </div>
+  
 
   <script>
   (function () {
