@@ -82,6 +82,33 @@
 
     .nav-links a:hover { color: var(--blue); }
 
+    .nav-burger {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      gap: 5px;
+      width: 34px;
+      height: 34px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      margin-left: 10px;
+    }
+
+    .nav-burger span {
+      display: block;
+      width: 22px;
+      height: 2px;
+      background: var(--navy);
+      border-radius: 2px;
+      transition: transform .2s ease, opacity .2s ease;
+    }
+
+    body.nav-open .nav-burger span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    body.nav-open .nav-burger span:nth-child(2) { opacity: 0; }
+    body.nav-open .nav-burger span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
     .lang-switch {
       display: flex;
       gap: 4px;
@@ -742,6 +769,17 @@
       margin-bottom: 24px;
     }
 
+    .salud-group-title {
+      font-size: 15px;
+      font-weight: 800;
+      color: #c0392b;
+      margin: 32px 0 14px;
+      text-transform: uppercase;
+      letter-spacing: .4px;
+    }
+
+    .salud-group-title:first-of-type { margin-top: 0; }
+
     .salud-counters {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
@@ -760,12 +798,13 @@
     .salud-counter-icon { font-size: 26px; margin-bottom: 8px; }
 
     .salud-counter-value {
-      font-size: 26px;
+      font-size: 22px;
       font-weight: 800;
       color: #c0392b;
       letter-spacing: -.5px;
       margin-bottom: 6px;
       font-variant-numeric: tabular-nums;
+      word-break: break-word;
     }
 
     .salud-counter-label {
@@ -850,9 +889,41 @@
 
     body.edit-mode .exp-delete { display: block; }
 
+    @media (max-width: 400px) {
+      .logo { font-size: 15.5px; }
+      .lang-btn { padding: 5px 7px; font-size: 10.5px; }
+    }
+
     /* RESPONSIVE */
     @media (max-width: 800px) {
-      .nav-links { display: none; }
+      .nav-burger { display: flex; }
+
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        flex-direction: column;
+        gap: 0;
+        background: var(--white);
+        border-bottom: 1px solid var(--border);
+        box-shadow: var(--shadow);
+        padding: 6px 20px 14px;
+      }
+
+      body.nav-open .nav-links { display: flex; }
+
+      .nav-links a {
+        padding: 13px 0;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .nav-links a:last-child { border-bottom: none; }
+
+      .lang-switch { margin-left: 8px; padding-left: 8px; gap: 3px; }
+      .nav-burger { margin-left: 6px; width: 28px; }
+
       .hero { padding: 60px 0; }
       .hero-grid,
       .about-grid,
@@ -883,6 +954,9 @@
         <a href="#contacto" data-key="nav-contacto">Contacto</a>
         <a href="#salud" class="nav-salud" data-key="nav-salud">Salud</a>
       </div>
+      <button type="button" class="nav-burger" id="navBurger" aria-label="Abrir menú">
+        <span></span><span></span><span></span>
+      </button>
       <div class="lang-switch">
         <button type="button" class="lang-btn active" data-lang="es">ES</button>
         <button type="button" class="lang-btn" data-lang="pt">PT</button>
@@ -910,7 +984,7 @@
           <div class="hero-buttons">
             <a class="btn btn-primary" href="#contacto" data-key="hero-btn-contact">Contactarme →</a>
             <span class="cv-row">
-              <a class="btn btn-secondary" href="cv.pdf" data-key="hero-btn-cv" data-href-key="cv-hero">Descargar CV</a>
+              <a class="btn btn-secondary" href="data:application/pdf;base64,JVBERi0xLjQKJZOMi54gUmVwb3J0TGFiIEdlbmVyYXRlZCBQREYgZG9jdW1lbnQgKG9wZW5zb3VyY2UpCjEgMCBvYmoKPDwKL0YxIDIgMCBSIC9GMiAzIDAgUgo+PgplbmRvYmoKMiAwIG9iago8PAovQmFzZUZvbnQgL0hlbHZldGljYSAvRW5jb2RpbmcgL1dpbkFuc2lFbmNvZGluZyAvTmFtZSAvRjEgL1N1YnR5cGUgL1R5cGUxIC9UeXBlIC9Gb250Cj4+CmVuZG9iagozIDAgb2JqCjw8Ci9CYXNlRm9udCAvSGVsdmV0aWNhLUJvbGQgL0VuY29kaW5nIC9XaW5BbnNpRW5jb2RpbmcgL05hbWUgL0YyIC9TdWJ0eXBlIC9UeXBlMSAvVHlwZSAvRm9udAo+PgplbmRvYmoKNCAwIG9iago8PAovQ29udGVudHMgOCAwIFIgL01lZGlhQm94IFsgMCAwIDU5NS4yNzU2IDg0MS44ODk4IF0gL1BhcmVudCA3IDAgUiAvUmVzb3VyY2VzIDw8Ci9Gb250IDEgMCBSIC9Qcm9jU2V0IFsgL1BERiAvVGV4dCAvSW1hZ2VCIC9JbWFnZUMgL0ltYWdlSSBdCj4+IC9Sb3RhdGUgMCAvVHJhbnMgPDwKCj4+IAogIC9UeXBlIC9QYWdlCj4+CmVuZG9iago1IDAgb2JqCjw8Ci9QYWdlTW9kZSAvVXNlTm9uZSAvUGFnZXMgNyAwIFIgL1R5cGUgL0NhdGFsb2cKPj4KZW5kb2JqCjYgMCBvYmoKPDwKL0F1dGhvciAoXChhbm9ueW1vdXNcKSkgL0NyZWF0aW9uRGF0ZSAoRDoyMDI2MDkyMTIwNDgzOCswMCcwMCcpIC9DcmVhdG9yIChcKHVuc3BlY2lmaWVkXCkpIC9LZXl3b3JkcyAoKSAvTW9kRGF0ZSAoRDoyMDI2MDkyMTIwNDgzOCswMCcwMCcpIC9Qcm9kdWNlciAoUmVwb3J0TGFiIFBERiBMaWJyYXJ5IC0gXChvcGVuc291cmNlXCkpIAogIC9TdWJqZWN0IChcKHVuc3BlY2lmaWVkXCkpIC9UaXRsZSAoXChhbm9ueW1vdXNcKSkgL1RyYXBwZWQgL0ZhbHNlCj4+CmVuZG9iago3IDAgb2JqCjw8Ci9Db3VudCAxIC9LaWRzIFsgNCAwIFIgXSAvVHlwZSAvUGFnZXMKPj4KZW5kb2JqCjggMCBvYmoKPDwKL0ZpbHRlciBbIC9BU0NJSTg1RGVjb2RlIC9GbGF0ZURlY29kZSBdIC9MZW5ndGggMTc0Nwo+PgpzdHJlYW0KR2IhI1xnTiZjUyY6Ti8zb1tCLDNQbjQuU2dZMz5iNCVfck0sSDpCN1YzYG5aQUs1KmIiIWpAYHJBSV5qIlVxWiRYWSNlYFRPSV1oa3BvK2RgPUZESXI+PUpDKDEoO1krPCMoajVjQCJYcVtPQ3JnIyJTYGhlP2hfbCJDUC1iOTJcOT1YSD1mQFJbXChfbVZrWUZKO3UjLihYODJcY01AVV9fayNkam9xbi1VQ0lfaT4zTz4/NkdyYCdmXWM/T24ycEEjK2kwQjxmNFY+JEtDLGpycEBuQEg2X0lYKCJRLTRWJ3IrU25iMmsuO01DWCRNTGgwSkJKM2pqPmsoJG9GZTAnUFxrKTIoPiI0ISZcS0hQcUooaVopcCUhSihSSl1EPDo3M2lAKWgoVF1EIWZKSyExRmA3bXFFX0U4LkA6KygoZGp0KDtwN3VHPVo5JS82ciMxTjlHS1JiUTsuI1pGIS1gMF84Tjc3XCk0XDtNKitVXkpaXlB0YlI8cGomTz05dU8oX0tqYUMiTiFqa1Y6K0d1IjZTclNuIic7WVBFaEo+WW8ibkNvPm8jIk8mJSYvL2taZVcsVWw1MylEKTlYL0c1Wk9CWU1lWmksM3MtMDA0QCF0JS5hcVxCWVZMcyhRMlAqPUApLVlsUm03MFI5OzZhPlk/NSFeYi9xYFYpWithPlMpYFByWjwoNjF1U188ZHUoQjhOcVdFJFUxa1ZcO1hLJGQnWD9bRjNQSmhSOCRFSkxAa1gsaENlPChAIywiPG4kZEduTWcnW3BtJDM5JlBbMVhvYmVvb1ldbGxxQWFtRl5nPipscFgtKFFBQ1NkIktfbC9tMlVvc2dlIkNXT1cnUmNRWV09WWVwXT5BJVBfRSJkJ2FKYCooTTxUL0o+M2hVMF1hS2UmVk9qIS1LQFxDLGF0OFouN01gMVZEV3JOJjkxZz5ONGRxUU5Haihobj1eJSZBaWczSkQ8UzUmJSEscixBUGpMMiNFSkYjOG1ETC41Jj5GakMzTkxBPnUyOjhFc3M/Kic7JmUoYj5XQS88bWNRLidbQEQrOyxubzs8Py9OMDY1SkpAJl02SEU0LV4jXT4hY1BMLSEjalo8JW9VPFJCMGpCciZhKDNIbE5ZaVpRS2VjKlpzdS1AKS5kaEFwQU9EOTAuZFFAdF4/MW1DZ2ZgbFgoYkQlbG91WTpPTyxXcGU6MTpIWF41KjwkbkRvQDxZVy9sKUFvSV1qQTgrRWkzXkxlSEc4XTBIbWlBLS5PJ15gRDM4XVhLaEVQYy1iTCEvbFQkJTI/QkxgJTNlY1FkcVooSTxWc2dJclBTRDBrOFhuSkhcOEZrTlVQVF49TiksdDlIRV9wUzljJTs7U108MSNSRlAuSU5DcmxnLF8rVT1WRzVBWCg4bl8ybUQtJktRcFFrY2VWOFs2MXByMUspVEc5KUtkJHNfU1dxPzRfczNjQF5ZZ0YkPjBSRUZKL14vXj9RRlpsaXE2MTpdLmUrbG0wV1tZYVpIVmQoZWYqISRSRGs5U1wmJHBfLCQuamw0RWVdJlVxVUJAJGZIUCM0MCRRMGtDYiZCXzxON1xpUEcrW19VS2Nna2E2QDE6ViVGYTJGNm5PMWMoYyllLlpJWzc8ciM6dTVCSmUkKTxgJG1DKWMuYXBHVnMmZXRfcGNsN0FfIyYuUXFVWjFfX04yXTUxRF5iWTpMNiE/UG1XRCNsZ1k2U0plc19GSDxfMHBhYHJhYjZhaFsyU2BuSV8nJiZOcylnLUFabkFBSUkhPkZkOCJWNSosbDFZcmZpdFBlYjZvaktZSEtuUyhPNFA1UWc7V1FIRlVJJUFyVkknOidaVlpNQ1pDN2hQcFlCZ0Q8PXVCRlZdJVBzJFI6VCxjQyVvLkE3LC5ALSZgUFFVS0ZCPGN0J0UmIWxDcG4iMCVCKVEnMT9zcl5VN09LS3MkcXAnPllXPyNcXzApPT9XQE8tSzMmb2kvRyY2VmZDLmlHSXJkUWNiZWRIPydyKyVHdHAoUC10TTwnMHI7OEJLPjFYNCteK1xdLC9dcjNrMmBhLXIhSCpZWzZmLEpBdEN0Xz5xVld0XS9gbkAtQ190ZTI3KTVqcUVvJiVmQDJKal0yQz4nPU9GJWBcZTBqcThfUHNmUEpwWEYxWD5PPjRvZGUyREdFaChbZGtzSkwyTFAjNVkwdFUtUTMvOV5WQls3SSNZOiVcRGBuJmM5azUjay5HN1NPNy5NUCg1NCxIX0NRIlpAci8oKD9pJmRuYFNkPD5fPGVkKV08KCNXND5kKjhdbmNQY2daO11QbjEyPmBbLUIvJzMha1tBZHF+PmVuZHN0cmVhbQplbmRvYmoKeHJlZgowIDkKMDAwMDAwMDAwMCA2NTUzNSBmIAowMDAwMDAwMDYxIDAwMDAwIG4gCjAwMDAwMDAxMDIgMDAwMDAgbiAKMDAwMDAwMDIwOSAwMDAwMCBuIAowMDAwMDAwMzIxIDAwMDAwIG4gCjAwMDAwMDA1MjQgMDAwMDAgbiAKMDAwMDAwMDU5MiAwMDAwMCBuIAowMDAwMDAwODcyIDAwMDAwIG4gCjAwMDAwMDA5MzEgMDAwMDAgbiAKdHJhaWxlcgo8PAovSUQgCls8MzcxMmUzMmM3NTk2YjgwNDI4ZjNhZTYzNzg4NThjNDY+PDM3MTJlMzJjNzU5NmI4MDQyOGYzYWU2Mzc4ODU4YzQ2Pl0KJSBSZXBvcnRMYWIgZ2VuZXJhdGVkIFBERiBkb2N1bWVudCAtLSBkaWdlc3QgKG9wZW5zb3VyY2UpCgovSW5mbyA2IDAgUgovUm9vdCA1IDAgUgovU2l6ZSA5Cj4+CnN0YXJ0eHJlZgoyNzY5CiUlRU9GCg==" download="CV_Joao_Victor_Cruz.pdf" data-key="hero-btn-cv" data-href-key="cv-hero">Descargar CV</a>
               <button type="button" class="href-edit-btn" data-for="cv-hero" title="Cambiar el archivo/enlace del CV">🔗</button>
             </span>
           </div>
@@ -1112,7 +1186,7 @@
           <p class="section-intro" data-key="contact-intro">Un gran abrazo.</p>
 
           <span class="cv-row contact-cv">
-            <a class="btn btn-secondary" href="cv.pdf" data-key="contact-btn-cv" data-href-key="cv-contact">
+            <a class="btn btn-secondary" href="data:application/pdf;base64,JVBERi0xLjQKJZOMi54gUmVwb3J0TGFiIEdlbmVyYXRlZCBQREYgZG9jdW1lbnQgKG9wZW5zb3VyY2UpCjEgMCBvYmoKPDwKL0YxIDIgMCBSIC9GMiAzIDAgUgo+PgplbmRvYmoKMiAwIG9iago8PAovQmFzZUZvbnQgL0hlbHZldGljYSAvRW5jb2RpbmcgL1dpbkFuc2lFbmNvZGluZyAvTmFtZSAvRjEgL1N1YnR5cGUgL1R5cGUxIC9UeXBlIC9Gb250Cj4+CmVuZG9iagozIDAgb2JqCjw8Ci9CYXNlRm9udCAvSGVsdmV0aWNhLUJvbGQgL0VuY29kaW5nIC9XaW5BbnNpRW5jb2RpbmcgL05hbWUgL0YyIC9TdWJ0eXBlIC9UeXBlMSAvVHlwZSAvRm9udAo+PgplbmRvYmoKNCAwIG9iago8PAovQ29udGVudHMgOCAwIFIgL01lZGlhQm94IFsgMCAwIDU5NS4yNzU2IDg0MS44ODk4IF0gL1BhcmVudCA3IDAgUiAvUmVzb3VyY2VzIDw8Ci9Gb250IDEgMCBSIC9Qcm9jU2V0IFsgL1BERiAvVGV4dCAvSW1hZ2VCIC9JbWFnZUMgL0ltYWdlSSBdCj4+IC9Sb3RhdGUgMCAvVHJhbnMgPDwKCj4+IAogIC9UeXBlIC9QYWdlCj4+CmVuZG9iago1IDAgb2JqCjw8Ci9QYWdlTW9kZSAvVXNlTm9uZSAvUGFnZXMgNyAwIFIgL1R5cGUgL0NhdGFsb2cKPj4KZW5kb2JqCjYgMCBvYmoKPDwKL0F1dGhvciAoXChhbm9ueW1vdXNcKSkgL0NyZWF0aW9uRGF0ZSAoRDoyMDI2MDkyMTIwNDgzOCswMCcwMCcpIC9DcmVhdG9yIChcKHVuc3BlY2lmaWVkXCkpIC9LZXl3b3JkcyAoKSAvTW9kRGF0ZSAoRDoyMDI2MDkyMTIwNDgzOCswMCcwMCcpIC9Qcm9kdWNlciAoUmVwb3J0TGFiIFBERiBMaWJyYXJ5IC0gXChvcGVuc291cmNlXCkpIAogIC9TdWJqZWN0IChcKHVuc3BlY2lmaWVkXCkpIC9UaXRsZSAoXChhbm9ueW1vdXNcKSkgL1RyYXBwZWQgL0ZhbHNlCj4+CmVuZG9iago3IDAgb2JqCjw8Ci9Db3VudCAxIC9LaWRzIFsgNCAwIFIgXSAvVHlwZSAvUGFnZXMKPj4KZW5kb2JqCjggMCBvYmoKPDwKL0ZpbHRlciBbIC9BU0NJSTg1RGVjb2RlIC9GbGF0ZURlY29kZSBdIC9MZW5ndGggMTc0Nwo+PgpzdHJlYW0KR2IhI1xnTiZjUyY6Ti8zb1tCLDNQbjQuU2dZMz5iNCVfck0sSDpCN1YzYG5aQUs1KmIiIWpAYHJBSV5qIlVxWiRYWSNlYFRPSV1oa3BvK2RgPUZESXI+PUpDKDEoO1krPCMoajVjQCJYcVtPQ3JnIyJTYGhlP2hfbCJDUC1iOTJcOT1YSD1mQFJbXChfbVZrWUZKO3UjLihYODJcY01AVV9fayNkam9xbi1VQ0lfaT4zTz4/NkdyYCdmXWM/T24ycEEjK2kwQjxmNFY+JEtDLGpycEBuQEg2X0lYKCJRLTRWJ3IrU25iMmsuO01DWCRNTGgwSkJKM2pqPmsoJG9GZTAnUFxrKTIoPiI0ISZcS0hQcUooaVopcCUhSihSSl1EPDo3M2lAKWgoVF1EIWZKSyExRmA3bXFFX0U4LkA6KygoZGp0KDtwN3VHPVo5JS82ciMxTjlHS1JiUTsuI1pGIS1gMF84Tjc3XCk0XDtNKitVXkpaXlB0YlI8cGomTz05dU8oX0tqYUMiTiFqa1Y6K0d1IjZTclNuIic7WVBFaEo+WW8ibkNvPm8jIk8mJSYvL2taZVcsVWw1MylEKTlYL0c1Wk9CWU1lWmksM3MtMDA0QCF0JS5hcVxCWVZMcyhRMlAqPUApLVlsUm03MFI5OzZhPlk/NSFeYi9xYFYpWithPlMpYFByWjwoNjF1U188ZHUoQjhOcVdFJFUxa1ZcO1hLJGQnWD9bRjNQSmhSOCRFSkxAa1gsaENlPChAIywiPG4kZEduTWcnW3BtJDM5JlBbMVhvYmVvb1ldbGxxQWFtRl5nPipscFgtKFFBQ1NkIktfbC9tMlVvc2dlIkNXT1cnUmNRWV09WWVwXT5BJVBfRSJkJ2FKYCooTTxUL0o+M2hVMF1hS2UmVk9qIS1LQFxDLGF0OFouN01gMVZEV3JOJjkxZz5ONGRxUU5Haihobj1eJSZBaWczSkQ8UzUmJSEscixBUGpMMiNFSkYjOG1ETC41Jj5GakMzTkxBPnUyOjhFc3M/Kic7JmUoYj5XQS88bWNRLidbQEQrOyxubzs8Py9OMDY1SkpAJl02SEU0LV4jXT4hY1BMLSEjalo8JW9VPFJCMGpCciZhKDNIbE5ZaVpRS2VjKlpzdS1AKS5kaEFwQU9EOTAuZFFAdF4/MW1DZ2ZgbFgoYkQlbG91WTpPTyxXcGU6MTpIWF41KjwkbkRvQDxZVy9sKUFvSV1qQTgrRWkzXkxlSEc4XTBIbWlBLS5PJ15gRDM4XVhLaEVQYy1iTCEvbFQkJTI/QkxgJTNlY1FkcVooSTxWc2dJclBTRDBrOFhuSkhcOEZrTlVQVF49TiksdDlIRV9wUzljJTs7U108MSNSRlAuSU5DcmxnLF8rVT1WRzVBWCg4bl8ybUQtJktRcFFrY2VWOFs2MXByMUspVEc5KUtkJHNfU1dxPzRfczNjQF5ZZ0YkPjBSRUZKL14vXj9RRlpsaXE2MTpdLmUrbG0wV1tZYVpIVmQoZWYqISRSRGs5U1wmJHBfLCQuamw0RWVdJlVxVUJAJGZIUCM0MCRRMGtDYiZCXzxON1xpUEcrW19VS2Nna2E2QDE6ViVGYTJGNm5PMWMoYyllLlpJWzc8ciM6dTVCSmUkKTxgJG1DKWMuYXBHVnMmZXRfcGNsN0FfIyYuUXFVWjFfX04yXTUxRF5iWTpMNiE/UG1XRCNsZ1k2U0plc19GSDxfMHBhYHJhYjZhaFsyU2BuSV8nJiZOcylnLUFabkFBSUkhPkZkOCJWNSosbDFZcmZpdFBlYjZvaktZSEtuUyhPNFA1UWc7V1FIRlVJJUFyVkknOidaVlpNQ1pDN2hQcFlCZ0Q8PXVCRlZdJVBzJFI6VCxjQyVvLkE3LC5ALSZgUFFVS0ZCPGN0J0UmIWxDcG4iMCVCKVEnMT9zcl5VN09LS3MkcXAnPllXPyNcXzApPT9XQE8tSzMmb2kvRyY2VmZDLmlHSXJkUWNiZWRIPydyKyVHdHAoUC10TTwnMHI7OEJLPjFYNCteK1xdLC9dcjNrMmBhLXIhSCpZWzZmLEpBdEN0Xz5xVld0XS9gbkAtQ190ZTI3KTVqcUVvJiVmQDJKal0yQz4nPU9GJWBcZTBqcThfUHNmUEpwWEYxWD5PPjRvZGUyREdFaChbZGtzSkwyTFAjNVkwdFUtUTMvOV5WQls3SSNZOiVcRGBuJmM5azUjay5HN1NPNy5NUCg1NCxIX0NRIlpAci8oKD9pJmRuYFNkPD5fPGVkKV08KCNXND5kKjhdbmNQY2daO11QbjEyPmBbLUIvJzMha1tBZHF+PmVuZHN0cmVhbQplbmRvYmoKeHJlZgowIDkKMDAwMDAwMDAwMCA2NTUzNSBmIAowMDAwMDAwMDYxIDAwMDAwIG4gCjAwMDAwMDAxMDIgMDAwMDAgbiAKMDAwMDAwMDIwOSAwMDAwMCBuIAowMDAwMDAwMzIxIDAwMDAwIG4gCjAwMDAwMDA1MjQgMDAwMDAgbiAKMDAwMDAwMDU5MiAwMDAwMCBuIAowMDAwMDAwODcyIDAwMDAwIG4gCjAwMDAwMDA5MzEgMDAwMDAgbiAKdHJhaWxlcgo8PAovSUQgCls8MzcxMmUzMmM3NTk2YjgwNDI4ZjNhZTYzNzg4NThjNDY+PDM3MTJlMzJjNzU5NmI4MDQyOGYzYWU2Mzc4ODU4YzQ2Pl0KJSBSZXBvcnRMYWIgZ2VuZXJhdGVkIFBERiBkb2N1bWVudCAtLSBkaWdlc3QgKG9wZW5zb3VyY2UpCgovSW5mbyA2IDAgUgovUm9vdCA1IDAgUgovU2l6ZSA5Cj4+CnN0YXJ0eHJlZgoyNzY5CiUlRU9GCg==" download="CV_Joao_Victor_Cruz.pdf" data-key="contact-btn-cv" data-href-key="cv-contact">
               Descargar CV completo
             </a>
             <button type="button" class="href-edit-btn" data-for="cv-contact" title="Cambiar el archivo/enlace del CV">🔗</button>
@@ -1159,6 +1233,7 @@
 
         <div class="worldo-live-badge">🔴 <span data-key="salud-live">EN VIVO</span></div>
 
+        <h3 class="salud-group-title" data-key="salud-group-poblacion">Población</h3>
         <div class="salud-counters">
           <div class="salud-counter">
             <div class="salud-counter-icon">🌍</div>
@@ -1170,6 +1245,10 @@
             <div class="salud-counter-value" id="counterBirths">–</div>
             <div class="salud-counter-label" data-key="salud-counter-births">Nacimientos este año</div>
           </div>
+        </div>
+
+        <h3 class="salud-group-title" data-key="salud-group-enfermedades">Salud y enfermedades</h3>
+        <div class="salud-counters">
           <div class="salud-counter">
             <div class="salud-counter-icon">🕊️</div>
             <div class="salud-counter-value" id="counterDeaths">–</div>
@@ -1179,6 +1258,80 @@
             <div class="salud-counter-icon">🏥</div>
             <div class="salud-counter-value" id="counterCDeaths">–</div>
             <div class="salud-counter-label" data-key="salud-counter-cdeaths">Muertes por enfermedades transmisibles este año</div>
+          </div>
+          <div class="salud-counter">
+            <div class="salud-counter-icon">🤧</div>
+            <div class="salud-counter-value" id="counterFlu">–</div>
+            <div class="salud-counter-label" data-key="salud-counter-flu">Muertes por gripe estacional este año</div>
+          </div>
+          <div class="salud-counter">
+            <div class="salud-counter-icon">🧒</div>
+            <div class="salud-counter-value" id="counterUnder5">–</div>
+            <div class="salud-counter-label" data-key="salud-counter-under5">Muertes de niños menores de 5 años este año</div>
+          </div>
+          <div class="salud-counter">
+            <div class="salud-counter-icon">🤰</div>
+            <div class="salud-counter-value" id="counterMaternal">–</div>
+            <div class="salud-counter-label" data-key="salud-counter-maternal">Muertes de madres durante el parto este año</div>
+          </div>
+          <div class="salud-counter">
+            <div class="salud-counter-icon">🎗️</div>
+            <div class="salud-counter-value" id="counterHivPeople">–</div>
+            <div class="salud-counter-label" data-key="salud-counter-hivpeople">Personas con VIH/sida</div>
+          </div>
+          <div class="salud-counter">
+            <div class="salud-counter-icon">🎗️</div>
+            <div class="salud-counter-value" id="counterHivDeaths">–</div>
+            <div class="salud-counter-label" data-key="salud-counter-hivdeaths">Muertes causadas por VIH/sida este año</div>
+          </div>
+          <div class="salud-counter">
+            <div class="salud-counter-icon">🩺</div>
+            <div class="salud-counter-value" id="counterCancer">–</div>
+            <div class="salud-counter-label" data-key="salud-counter-cancer">Muertes causadas por cáncer este año</div>
+          </div>
+          <div class="salud-counter">
+            <div class="salud-counter-icon">🦟</div>
+            <div class="salud-counter-value" id="counterMalaria">–</div>
+            <div class="salud-counter-label" data-key="salud-counter-malaria">Muertes causadas por malaria este año</div>
+          </div>
+        </div>
+
+        <h3 class="salud-group-title" data-key="salud-group-habitos">Hábitos, sociedad y economía</h3>
+        <div class="salud-counters">
+          <div class="salud-counter">
+            <div class="salud-counter-icon">🚬</div>
+            <div class="salud-counter-value" id="counterCigarettes">–</div>
+            <div class="salud-counter-label" data-key="salud-counter-cigarettes">Cigarrillos fumados hoy</div>
+          </div>
+          <div class="salud-counter">
+            <div class="salud-counter-icon">🚭</div>
+            <div class="salud-counter-value" id="counterSmokingDeaths">–</div>
+            <div class="salud-counter-label" data-key="salud-counter-smokingdeaths">Muertes causadas por tabaquismo este año</div>
+          </div>
+          <div class="salud-counter">
+            <div class="salud-counter-icon">🍺</div>
+            <div class="salud-counter-value" id="counterAlcoholDeaths">–</div>
+            <div class="salud-counter-label" data-key="salud-counter-alcoholdeaths">Muertes causadas por alcohol este año</div>
+          </div>
+          <div class="salud-counter">
+            <div class="salud-counter-icon">📉</div>
+            <div class="salud-counter-value" id="counterAbortions">–</div>
+            <div class="salud-counter-label" data-key="salud-counter-abortions">Abortos este año</div>
+          </div>
+          <div class="salud-counter">
+            <div class="salud-counter-icon">💔</div>
+            <div class="salud-counter-value" id="counterSuicides">–</div>
+            <div class="salud-counter-label" data-key="salud-counter-suicides">Suicidios este año</div>
+          </div>
+          <div class="salud-counter">
+            <div class="salud-counter-icon">💊</div>
+            <div class="salud-counter-value" id="counterDrugMoney">–</div>
+            <div class="salud-counter-label" data-key="salud-counter-drugmoney">Dinero gastado en drogas ilegales este año</div>
+          </div>
+          <div class="salud-counter">
+            <div class="salud-counter-icon">🚗</div>
+            <div class="salud-counter-value" id="counterRoad">–</div>
+            <div class="salud-counter-label" data-key="salud-counter-road">Muertes por accidentes de tránsito este año</div>
           </div>
         </div>
 
@@ -1711,6 +1864,23 @@
         'salud-counter-cdeaths': 'Mortes por doenças transmissíveis este ano',
         'salud-link': 'Ver a fonte original →',
         'salud-source': 'Metodologia e taxas de referência: Worldometers.info.',
+        'salud-group-poblacion': 'População',
+        'salud-group-enfermedades': 'Saúde e doenças',
+        'salud-group-habitos': 'Hábitos, sociedade e economia',
+        'salud-counter-flu': 'Mortes por gripe sazonal este ano',
+        'salud-counter-under5': 'Mortes de crianças menores de 5 anos este ano',
+        'salud-counter-maternal': 'Mortes maternas durante o parto este ano',
+        'salud-counter-hivpeople': 'Pessoas vivendo com HIV/aids',
+        'salud-counter-hivdeaths': 'Mortes causadas por HIV/aids este ano',
+        'salud-counter-cancer': 'Mortes causadas por câncer este ano',
+        'salud-counter-malaria': 'Mortes causadas por malária este ano',
+        'salud-counter-cigarettes': 'Cigarros fumados hoje',
+        'salud-counter-smokingdeaths': 'Mortes causadas pelo tabagismo este ano',
+        'salud-counter-alcoholdeaths': 'Mortes causadas pelo álcool este ano',
+        'salud-counter-abortions': 'Abortos este ano',
+        'salud-counter-suicides': 'Suicídios este ano',
+        'salud-counter-drugmoney': 'Dinheiro gasto em drogas ilegais este ano',
+        'salud-counter-road': 'Mortes por acidentes de trânsito este ano',
         'contact-label': 'Contato', 'contact-title': 'Obrigado pela visita',
         'contact-intro': 'Um grande abraço.', 'contact-btn-cv': 'Baixar currículo completo',
         'footer-text': '© 2026 João Victor Cruz · Medicina &amp; Cardiologia Ambulatorial'
@@ -1748,6 +1918,23 @@
         'salud-counter-cdeaths': 'Deaths from communicable diseases this year',
         'salud-link': 'See the original source →',
         'salud-source': 'Methodology and reference rates: Worldometers.info.',
+        'salud-group-poblacion': 'Population',
+        'salud-group-enfermedades': 'Health and disease',
+        'salud-group-habitos': 'Habits, society and economy',
+        'salud-counter-flu': 'Seasonal flu deaths this year',
+        'salud-counter-under5': 'Deaths of children under 5 this year',
+        'salud-counter-maternal': 'Deaths of mothers during birth this year',
+        'salud-counter-hivpeople': 'People living with HIV/AIDS',
+        'salud-counter-hivdeaths': 'Deaths caused by HIV/AIDS this year',
+        'salud-counter-cancer': 'Deaths caused by cancer this year',
+        'salud-counter-malaria': 'Deaths caused by malaria this year',
+        'salud-counter-cigarettes': 'Cigarettes smoked today',
+        'salud-counter-smokingdeaths': 'Deaths caused by smoking this year',
+        'salud-counter-alcoholdeaths': 'Deaths caused by alcohol this year',
+        'salud-counter-abortions': 'Abortions this year',
+        'salud-counter-suicides': 'Suicides this year',
+        'salud-counter-drugmoney': 'Money spent on illegal drugs this year',
+        'salud-counter-road': 'Road traffic accident fatalities this year',
         'contact-label': 'Contact', 'contact-title': 'Thanks for visiting',
         'contact-intro': 'A big hug.', 'contact-btn-cv': 'Download full CV',
         'footer-text': '© 2026 João Victor Cruz · Medicine &amp; Ambulatory Cardiology'
@@ -1782,9 +1969,26 @@
       b.addEventListener('click', function () { applyLanguage(b.getAttribute('data-lang')); });
     });
 
+    /* ---------- menú móvil (hamburguesa) ---------- */
+    var navBurger = document.getElementById('navBurger');
+    if (navBurger) {
+      navBurger.addEventListener('click', function () {
+        document.body.classList.toggle('nav-open');
+      });
+      document.querySelectorAll('.nav-links a').forEach(function (link) {
+        link.addEventListener('click', function () {
+          document.body.classList.remove('nav-open');
+        });
+      });
+    }
+
     /* ---------- índices de salud en vivo (calculados con tasas promedio de Worldometers.info) ---------- */
     function fmtCounter(n) {
       return Math.max(0, Math.floor(n)).toLocaleString('es-AR');
+    }
+
+    function fmtMoney(n) {
+      return '$' + Math.max(0, Math.floor(n)).toLocaleString('es-AR');
     }
 
     function updateSaludCounters() {
@@ -1793,24 +1997,65 @@
       var yearStart = Date.UTC(new Date().getUTCFullYear(), 0, 1);
       var secondsThisYear = (now - yearStart) / 1000;
 
+      var dayStart = Date.UTC(new Date().getUTCFullYear(), new Date().getUTCMonth(), new Date().getUTCDate());
+      var secondsToday = (now - dayStart) / 1000;
+
       var popBaseline = 8200000000;              // referencia: 1 ene 2026 (Worldometers)
       var popBaselineTime = Date.UTC(2026, 0, 1);
       var popRatePerSecond = 2.3;                 // crecimiento neto promedio por segundo
       var population = popBaseline + ((now - popBaselineTime) / 1000) * popRatePerSecond;
 
-      var birthsPerSecond = 4.45;                 // ≈ 140M nacimientos/año
-      var deathsPerSecond = 1.93;                 // ≈ 61M muertes/año
-      var cDeathsPerSecond = 0.41;                // ≈ 13M muertes por enf. transmisibles/año
+      var hivBaseline = 47642531;                 // referencia: 20 sep 2026 (Worldometers)
+      var hivBaselineTime = Date.UTC(2026, 8, 20);
+      var hivRatePerSecond = 0.021;               // crecimiento neto promedio por segundo
+      var hivPeople = hivBaseline + ((now - hivBaselineTime) / 1000) * hivRatePerSecond;
 
-      var elPop = document.getElementById('counterPopulation');
-      var elBirths = document.getElementById('counterBirths');
-      var elDeaths = document.getElementById('counterDeaths');
-      var elCDeaths = document.getElementById('counterCDeaths');
+      /* tasas por segundo, calibradas con los valores reales publicados por Worldometers.info */
+      var rates = {
+        births: 4.45,
+        deaths: 1.93,
+        cDeaths: 0.4114,
+        flu: 0.0165,
+        under5: 0.2409,
+        maternal: 0.00980,
+        hivDeaths: 0.05328,
+        cancer: 0.26029,
+        malaria: 0.01250,
+        smokingDeaths: 0.15843,
+        alcoholDeaths: 0.07927,
+        abortions: 1.44615,
+        suicides: 0.03399,
+        drugMoney: 12678.71,
+        road: 0.04278
+      };
 
-      if (elPop) elPop.textContent = fmtCounter(population);
-      if (elBirths) elBirths.textContent = fmtCounter(secondsThisYear * birthsPerSecond);
-      if (elDeaths) elDeaths.textContent = fmtCounter(secondsThisYear * deathsPerSecond);
-      if (elCDeaths) elCDeaths.textContent = fmtCounter(secondsThisYear * cDeathsPerSecond);
+      var cigarettesPerDay = 15616438356;         // ≈ 5.7 billones de cigarrillos/año
+
+      var values = {
+        counterPopulation: fmtCounter(population),
+        counterBirths: fmtCounter(secondsThisYear * rates.births),
+        counterDeaths: fmtCounter(secondsThisYear * rates.deaths),
+        counterCDeaths: fmtCounter(secondsThisYear * rates.cDeaths),
+        counterFlu: fmtCounter(secondsThisYear * rates.flu),
+        counterUnder5: fmtCounter(secondsThisYear * rates.under5),
+        counterMaternal: fmtCounter(secondsThisYear * rates.maternal),
+        counterHivPeople: fmtCounter(hivPeople),
+        counterHivDeaths: fmtCounter(secondsThisYear * rates.hivDeaths),
+        counterCancer: fmtCounter(secondsThisYear * rates.cancer),
+        counterMalaria: fmtCounter(secondsThisYear * rates.malaria),
+        counterCigarettes: fmtCounter(secondsToday * (cigarettesPerDay / 86400)),
+        counterSmokingDeaths: fmtCounter(secondsThisYear * rates.smokingDeaths),
+        counterAlcoholDeaths: fmtCounter(secondsThisYear * rates.alcoholDeaths),
+        counterAbortions: fmtCounter(secondsThisYear * rates.abortions),
+        counterSuicides: fmtCounter(secondsThisYear * rates.suicides),
+        counterDrugMoney: fmtMoney(secondsThisYear * rates.drugMoney),
+        counterRoad: fmtCounter(secondsThisYear * rates.road)
+      };
+
+      Object.keys(values).forEach(function (id) {
+        var el = document.getElementById(id);
+        if (el) el.textContent = values[id];
+      });
     }
 
     /* ---------- inicialización ---------- */
