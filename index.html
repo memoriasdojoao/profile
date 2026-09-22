@@ -1414,11 +1414,19 @@
     <span data-key="footer-text">© 2026 João Victor Cruz · Medicina &amp; Cardiología Ambulatoria</span><span id="secretIcon" title=" ">·</span>
   </footer>
 
-  
+  <input type="file" id="photoInput" accept="image/*" style="display:none">
 
-  
+  <div class="edit-hint" id="editHint">
+    Estás en <strong>modo edición</strong>. Hacé click en cualquier texto para editarlo, arrastrá certificados o experiencias para reordenarlos, y usá los botones de abajo para guardar los cambios.
+    <button type="button" onclick="this.parentElement.style.display='none'">Entendido</button>
+  </div>
 
-  
+  <div class="edit-toggle-bar">
+    <button type="button" class="edit-toggle-btn secondary" id="downloadBtn">⬇️ Descargar página</button>
+    <button type="button" class="edit-toggle-btn secondary" id="resetBtn">♻️ Restaurar original</button>
+    <button type="button" class="edit-toggle-btn lock-btn" id="lockBtn">🔒 Bloquear</button>
+    <button type="button" class="edit-toggle-btn" id="editToggleBtn">✏️ Editar página</button>
+  </div>
 
   <script>
   (function () {
@@ -1926,7 +1934,6 @@
       if (wasEditing) setEditMode(false);
 
       var clone = document.documentElement.cloneNode(true);
-      clone.querySelectorAll('.edit-toggle-bar, .edit-hint, #photoInput').forEach(function (n) { n.remove(); });
       var cloneBody = clone.querySelector('body');
       if (cloneBody) { cloneBody.classList.remove('edit-mode'); cloneBody.classList.remove('unlocked'); }
       clone.querySelectorAll('[contenteditable]').forEach(function (n) { n.removeAttribute('contenteditable'); });
