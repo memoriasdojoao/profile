@@ -309,6 +309,62 @@
       margin-bottom: 16px;
     }
 
+    .about-photo-text {
+      display: flex;
+      gap: 26px;
+      align-items: flex-start;
+    }
+
+    .about-photo {
+      position: relative;
+      overflow: hidden;
+      flex-shrink: 0;
+      width: 220px;
+      height: 260px;
+      border-radius: var(--radius);
+      background: var(--bg);
+      background-size: cover;
+      background-position: center center;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+      cursor: default;
+    }
+
+    body.edit-mode .about-photo { cursor: pointer; }
+
+    .about-photo .photo-placeholder-text {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      font-size: 12px;
+      color: var(--muted);
+      padding: 12px;
+      line-height: 1.3;
+    }
+
+    .about-photo .photo-placeholder-text strong {
+      font-size: 30px;
+      color: var(--navy);
+      display: block;
+      margin-bottom: 6px;
+    }
+
+    .about-photo .photo-edit-overlay {
+      border-radius: var(--radius);
+      font-size: 12.5px;
+      padding: 8px;
+    }
+
+    @media (max-width: 620px) {
+      .about-photo-text { flex-direction: column; align-items: center; }
+      .about-photo { width: 100%; max-width: 280px; height: 260px; }
+      .about-photo-text .about-text { width: 100%; }
+    }
+
     .highlight-box {
       background: var(--navy);
       color: white;
@@ -984,7 +1040,7 @@
           <div class="hero-buttons">
             <a class="btn btn-primary" href="#contacto" data-key="hero-btn-contact">Contactarme →</a>
             <span class="cv-row">
-              <a class="btn btn-secondary" href="data:application/pdf;base64,JVBERi0xLjQKJZOMi54gUmVwb3J0TGFiIEdlbmVyYXRlZCBQREYgZG9jdW1lbnQgKG9wZW5zb3VyY2UpCjEgMCBvYmoKPDwKL0YxIDIgMCBSIC9GMiAzIDAgUgo+PgplbmRvYmoKMiAwIG9iago8PAovQmFzZUZvbnQgL0hlbHZldGljYSAvRW5jb2RpbmcgL1dpbkFuc2lFbmNvZGluZyAvTmFtZSAvRjEgL1N1YnR5cGUgL1R5cGUxIC9UeXBlIC9Gb250Cj4+CmVuZG9iagozIDAgb2JqCjw8Ci9CYXNlRm9udCAvSGVsdmV0aWNhLUJvbGQgL0VuY29kaW5nIC9XaW5BbnNpRW5jb2RpbmcgL05hbWUgL0YyIC9TdWJ0eXBlIC9UeXBlMSAvVHlwZSAvRm9udAo+PgplbmRvYmoKNCAwIG9iago8PAovQ29udGVudHMgOCAwIFIgL01lZGlhQm94IFsgMCAwIDU5NS4yNzU2IDg0MS44ODk4IF0gL1BhcmVudCA3IDAgUiAvUmVzb3VyY2VzIDw8Ci9Gb250IDEgMCBSIC9Qcm9jU2V0IFsgL1BERiAvVGV4dCAvSW1hZ2VCIC9JbWFnZUMgL0ltYWdlSSBdCj4+IC9Sb3RhdGUgMCAvVHJhbnMgPDwKCj4+IAogIC9UeXBlIC9QYWdlCj4+CmVuZG9iago1IDAgb2JqCjw8Ci9QYWdlTW9kZSAvVXNlTm9uZSAvUGFnZXMgNyAwIFIgL1R5cGUgL0NhdGFsb2cKPj4KZW5kb2JqCjYgMCBvYmoKPDwKL0F1dGhvciAoXChhbm9ueW1vdXNcKSkgL0NyZWF0aW9uRGF0ZSAoRDoyMDI2MDkyMTIwNDgzOCswMCcwMCcpIC9DcmVhdG9yIChcKHVuc3BlY2lmaWVkXCkpIC9LZXl3b3JkcyAoKSAvTW9kRGF0ZSAoRDoyMDI2MDkyMTIwNDgzOCswMCcwMCcpIC9Qcm9kdWNlciAoUmVwb3J0TGFiIFBERiBMaWJyYXJ5IC0gXChvcGVuc291cmNlXCkpIAogIC9TdWJqZWN0IChcKHVuc3BlY2lmaWVkXCkpIC9UaXRsZSAoXChhbm9ueW1vdXNcKSkgL1RyYXBwZWQgL0ZhbHNlCj4+CmVuZG9iago3IDAgb2JqCjw8Ci9Db3VudCAxIC9LaWRzIFsgNCAwIFIgXSAvVHlwZSAvUGFnZXMKPj4KZW5kb2JqCjggMCBvYmoKPDwKL0ZpbHRlciBbIC9BU0NJSTg1RGVjb2RlIC9GbGF0ZURlY29kZSBdIC9MZW5ndGggMTc0Nwo+PgpzdHJlYW0KR2IhI1xnTiZjUyY6Ti8zb1tCLDNQbjQuU2dZMz5iNCVfck0sSDpCN1YzYG5aQUs1KmIiIWpAYHJBSV5qIlVxWiRYWSNlYFRPSV1oa3BvK2RgPUZESXI+PUpDKDEoO1krPCMoajVjQCJYcVtPQ3JnIyJTYGhlP2hfbCJDUC1iOTJcOT1YSD1mQFJbXChfbVZrWUZKO3UjLihYODJcY01AVV9fayNkam9xbi1VQ0lfaT4zTz4/NkdyYCdmXWM/T24ycEEjK2kwQjxmNFY+JEtDLGpycEBuQEg2X0lYKCJRLTRWJ3IrU25iMmsuO01DWCRNTGgwSkJKM2pqPmsoJG9GZTAnUFxrKTIoPiI0ISZcS0hQcUooaVopcCUhSihSSl1EPDo3M2lAKWgoVF1EIWZKSyExRmA3bXFFX0U4LkA6KygoZGp0KDtwN3VHPVo5JS82ciMxTjlHS1JiUTsuI1pGIS1gMF84Tjc3XCk0XDtNKitVXkpaXlB0YlI8cGomTz05dU8oX0tqYUMiTiFqa1Y6K0d1IjZTclNuIic7WVBFaEo+WW8ibkNvPm8jIk8mJSYvL2taZVcsVWw1MylEKTlYL0c1Wk9CWU1lWmksM3MtMDA0QCF0JS5hcVxCWVZMcyhRMlAqPUApLVlsUm03MFI5OzZhPlk/NSFeYi9xYFYpWithPlMpYFByWjwoNjF1U188ZHUoQjhOcVdFJFUxa1ZcO1hLJGQnWD9bRjNQSmhSOCRFSkxAa1gsaENlPChAIywiPG4kZEduTWcnW3BtJDM5JlBbMVhvYmVvb1ldbGxxQWFtRl5nPipscFgtKFFBQ1NkIktfbC9tMlVvc2dlIkNXT1cnUmNRWV09WWVwXT5BJVBfRSJkJ2FKYCooTTxUL0o+M2hVMF1hS2UmVk9qIS1LQFxDLGF0OFouN01gMVZEV3JOJjkxZz5ONGRxUU5Haihobj1eJSZBaWczSkQ8UzUmJSEscixBUGpMMiNFSkYjOG1ETC41Jj5GakMzTkxBPnUyOjhFc3M/Kic7JmUoYj5XQS88bWNRLidbQEQrOyxubzs8Py9OMDY1SkpAJl02SEU0LV4jXT4hY1BMLSEjalo8JW9VPFJCMGpCciZhKDNIbE5ZaVpRS2VjKlpzdS1AKS5kaEFwQU9EOTAuZFFAdF4/MW1DZ2ZgbFgoYkQlbG91WTpPTyxXcGU6MTpIWF41KjwkbkRvQDxZVy9sKUFvSV1qQTgrRWkzXkxlSEc4XTBIbWlBLS5PJ15gRDM4XVhLaEVQYy1iTCEvbFQkJTI/QkxgJTNlY1FkcVooSTxWc2dJclBTRDBrOFhuSkhcOEZrTlVQVF49TiksdDlIRV9wUzljJTs7U108MSNSRlAuSU5DcmxnLF8rVT1WRzVBWCg4bl8ybUQtJktRcFFrY2VWOFs2MXByMUspVEc5KUtkJHNfU1dxPzRfczNjQF5ZZ0YkPjBSRUZKL14vXj9RRlpsaXE2MTpdLmUrbG0wV1tZYVpIVmQoZWYqISRSRGs5U1wmJHBfLCQuamw0RWVdJlVxVUJAJGZIUCM0MCRRMGtDYiZCXzxON1xpUEcrW19VS2Nna2E2QDE6ViVGYTJGNm5PMWMoYyllLlpJWzc8ciM6dTVCSmUkKTxgJG1DKWMuYXBHVnMmZXRfcGNsN0FfIyYuUXFVWjFfX04yXTUxRF5iWTpMNiE/UG1XRCNsZ1k2U0plc19GSDxfMHBhYHJhYjZhaFsyU2BuSV8nJiZOcylnLUFabkFBSUkhPkZkOCJWNSosbDFZcmZpdFBlYjZvaktZSEtuUyhPNFA1UWc7V1FIRlVJJUFyVkknOidaVlpNQ1pDN2hQcFlCZ0Q8PXVCRlZdJVBzJFI6VCxjQyVvLkE3LC5ALSZgUFFVS0ZCPGN0J0UmIWxDcG4iMCVCKVEnMT9zcl5VN09LS3MkcXAnPllXPyNcXzApPT9XQE8tSzMmb2kvRyY2VmZDLmlHSXJkUWNiZWRIPydyKyVHdHAoUC10TTwnMHI7OEJLPjFYNCteK1xdLC9dcjNrMmBhLXIhSCpZWzZmLEpBdEN0Xz5xVld0XS9gbkAtQ190ZTI3KTVqcUVvJiVmQDJKal0yQz4nPU9GJWBcZTBqcThfUHNmUEpwWEYxWD5PPjRvZGUyREdFaChbZGtzSkwyTFAjNVkwdFUtUTMvOV5WQls3SSNZOiVcRGBuJmM5azUjay5HN1NPNy5NUCg1NCxIX0NRIlpAci8oKD9pJmRuYFNkPD5fPGVkKV08KCNXND5kKjhdbmNQY2daO11QbjEyPmBbLUIvJzMha1tBZHF+PmVuZHN0cmVhbQplbmRvYmoKeHJlZgowIDkKMDAwMDAwMDAwMCA2NTUzNSBmIAowMDAwMDAwMDYxIDAwMDAwIG4gCjAwMDAwMDAxMDIgMDAwMDAgbiAKMDAwMDAwMDIwOSAwMDAwMCBuIAowMDAwMDAwMzIxIDAwMDAwIG4gCjAwMDAwMDA1MjQgMDAwMDAgbiAKMDAwMDAwMDU5MiAwMDAwMCBuIAowMDAwMDAwODcyIDAwMDAwIG4gCjAwMDAwMDA5MzEgMDAwMDAgbiAKdHJhaWxlcgo8PAovSUQgCls8MzcxMmUzMmM3NTk2YjgwNDI4ZjNhZTYzNzg4NThjNDY+PDM3MTJlMzJjNzU5NmI4MDQyOGYzYWU2Mzc4ODU4YzQ2Pl0KJSBSZXBvcnRMYWIgZ2VuZXJhdGVkIFBERiBkb2N1bWVudCAtLSBkaWdlc3QgKG9wZW5zb3VyY2UpCgovSW5mbyA2IDAgUgovUm9vdCA1IDAgUgovU2l6ZSA5Cj4+CnN0YXJ0eHJlZgoyNzY5CiUlRU9GCg==" download="CV_Joao_Victor_Cruz.pdf" data-key="hero-btn-cv" data-href-key="cv-hero">Descargar CV</a>
+              <a class="btn btn-secondary cv-download-link" href="#" download="CV_Joao_Victor_Cruz.pdf" data-key="hero-btn-cv" data-href-key="cv-hero">Descargar CV</a>
               <button type="button" class="href-edit-btn" data-for="cv-hero" title="Cambiar el archivo/enlace del CV">🔗</button>
             </span>
           </div>
@@ -1012,7 +1068,16 @@
         <h2 data-key="sobre-title">Sobre mí</h2>
 
         <div class="about-grid">
-          <div class="about-text">
+          <div class="about-photo-text">
+            <div class="about-photo" id="aboutPhoto">
+              <div class="photo-placeholder-text">
+                <strong>JV</strong>
+                Agregá tu foto
+              </div>
+              <div class="photo-edit-overlay">📷 Click para subir tu foto</div>
+            </div>
+
+            <div class="about-text">
             <p data-key="sobre-p1">
               Soy estudiante de Medicina del 5º año en Fundación H. A. Barceló y cuento
               con formación técnica en electrocardiografía, MAPA y Holter.
@@ -1029,6 +1094,7 @@
               aportar mis conocimientos técnicos, continuar aprendiendo y
               desarrollar progresivamente mi trayectoria profesional.
             </p>
+            </div>
           </div>
 
           <div class="highlight-box">
@@ -1153,7 +1219,7 @@
         <p class="section-intro" data-key="cert-intro">
           Cursos, certificaciones y congresos a los que asistí.</p>
 
-        <div class="cards" id="certList"><article class="card cert-card" data-i="0" draggable="false"><span class="drag-handle" title="Arrastrá para reordenar">⠿⠿</span><button type="button" class="icon-toggle-btn" data-i="0" title="Cambiar ícono">🔁</button><button type="button" class="cert-delete" title="Eliminar" data-i="0">×</button><div class="card-icon">📚</div><h3 class="cert-title" data-i="0" data-f="title">Técnico en ECG, MAPA y Holter</h3><p class="cert-place" data-i="0" data-f="place">Centro Medico Escuela</p><div class="cert-date" data-i="0" data-f="date">2026</div></article><article class="card cert-card" data-i="1" draggable="false"><span class="drag-handle" title="Arrastrá para reordenar">⠿⠿</span><button type="button" class="icon-toggle-btn" data-i="1" title="Cambiar ícono">🔁</button><button type="button" class="cert-delete" title="Eliminar" data-i="1">×</button><div class="card-icon">📚</div><h3 class="cert-title" data-i="1" data-f="title">Transtorno del Ritmo - FA</h3><p class="cert-place" data-i="1" data-f="place">ICBA</p><div class="cert-date" data-i="1" data-f="date">2026</div></article><article class="card cert-card" data-i="2" draggable="false"><span class="drag-handle" title="Arrastrá para reordenar">⠿⠿</span><button type="button" class="icon-toggle-btn" data-i="2" title="Cambiar ícono">🔁</button><button type="button" class="cert-delete" title="Eliminar" data-i="2">×</button><div class="card-icon">🏅</div><h3 class="cert-title" data-i="2" data-f="title">Congreso de Cardiología&nbsp;</h3><p class="cert-place" data-i="2" data-f="place">SAC</p><div class="cert-date" data-i="2" data-f="date">2026</div></article><article class="card cert-card" data-i="3" draggable="false"><span class="drag-handle" title="Arrastrá para reordenar">⠿⠿</span><button type="button" class="icon-toggle-btn" data-i="3" title="Cambiar ícono">🔁</button><button type="button" class="cert-delete" title="Eliminar" data-i="3">×</button><div class="card-icon">🏅</div><h3 class="cert-title" data-i="3" data-f="title">Congreso Imágenes - Cardio</h3><p class="cert-place" data-i="3" data-f="place">SAC</p><div class="cert-date" data-i="3" data-f="date">2026</div></article><article class="card cert-card" data-i="4" draggable="false"><span class="drag-handle" title="Arrastrá para reordenar">⠿⠿</span><button type="button" class="icon-toggle-btn" data-i="4" title="Cambiar ícono">🔁</button><button type="button" class="cert-delete" title="Eliminar" data-i="4">×</button><div class="card-icon">🏅</div><h3 class="cert-title" data-i="4" data-f="title">Congreso Argentino de Salud</h3><p class="cert-place" data-i="4" data-f="place">ACAMI</p><div class="cert-date" data-i="4" data-f="date">2025</div></article><article class="card cert-card" data-i="5" draggable="false"><span class="drag-handle" title="Arrastrá para reordenar">⠿⠿</span><button type="button" class="icon-toggle-btn" data-i="5" title="Cambiar ícono">🔁</button><button type="button" class="cert-delete" title="Eliminar" data-i="5">×</button><div class="card-icon">🏅</div><h3 class="cert-title" data-i="5" data-f="title">Congreso de Infectología</h3><p class="cert-place" data-i="5" data-f="place">SADI</p><div class="cert-date" data-i="5" data-f="date">2023</div></article></div>
+        <div class="cards" id="certList"></div>
 
         <button type="button" class="add-cert-btn" id="addCertBtn">+ Agregar certificado o congreso</button>
       </div>
@@ -1169,7 +1235,7 @@
           Mi trayectoria profesional.
         </p>
 
-        <div id="expList"><div class="experience-box" data-i="0" draggable="false"><span class="drag-handle" title="Arrastrá para reordenar">⠿⠿</span><button type="button" class="exp-delete" title="Eliminar" data-i="0">×</button><div class="experience-top"><div><h3 class="exp-field" data-i="0" data-f="role">Practicante</h3><div class="experience-company exp-field" data-i="0" data-f="company">Hospital Gandulfo</div></div><div class="experience-date exp-field" data-i="0" data-f="date">2026 — Actualidad</div></div><ul><li class="exp-field" data-i="0" data-f="li1">Atendimento a pacientes hospitalizados</li><li class="exp-field" data-i="0" data-f="li2">Shockroom</li><li class="exp-field" data-i="0" data-f="li3">Aprendizaje con médicos expertos</li><li class="exp-field" data-i="0" data-f="li4">Desarrollo de profesional</li></ul></div></div>
+        <div id="expList"></div>
 
         <button type="button" class="add-cert-btn" id="addExpBtn">+ Agregar experiencia</button>
       </div>
@@ -1186,7 +1252,7 @@
           <p class="section-intro" data-key="contact-intro">Un gran abrazo.</p>
 
           <span class="cv-row contact-cv">
-            <a class="btn btn-secondary" href="data:application/pdf;base64,JVBERi0xLjQKJZOMi54gUmVwb3J0TGFiIEdlbmVyYXRlZCBQREYgZG9jdW1lbnQgKG9wZW5zb3VyY2UpCjEgMCBvYmoKPDwKL0YxIDIgMCBSIC9GMiAzIDAgUgo+PgplbmRvYmoKMiAwIG9iago8PAovQmFzZUZvbnQgL0hlbHZldGljYSAvRW5jb2RpbmcgL1dpbkFuc2lFbmNvZGluZyAvTmFtZSAvRjEgL1N1YnR5cGUgL1R5cGUxIC9UeXBlIC9Gb250Cj4+CmVuZG9iagozIDAgb2JqCjw8Ci9CYXNlRm9udCAvSGVsdmV0aWNhLUJvbGQgL0VuY29kaW5nIC9XaW5BbnNpRW5jb2RpbmcgL05hbWUgL0YyIC9TdWJ0eXBlIC9UeXBlMSAvVHlwZSAvRm9udAo+PgplbmRvYmoKNCAwIG9iago8PAovQ29udGVudHMgOCAwIFIgL01lZGlhQm94IFsgMCAwIDU5NS4yNzU2IDg0MS44ODk4IF0gL1BhcmVudCA3IDAgUiAvUmVzb3VyY2VzIDw8Ci9Gb250IDEgMCBSIC9Qcm9jU2V0IFsgL1BERiAvVGV4dCAvSW1hZ2VCIC9JbWFnZUMgL0ltYWdlSSBdCj4+IC9Sb3RhdGUgMCAvVHJhbnMgPDwKCj4+IAogIC9UeXBlIC9QYWdlCj4+CmVuZG9iago1IDAgb2JqCjw8Ci9QYWdlTW9kZSAvVXNlTm9uZSAvUGFnZXMgNyAwIFIgL1R5cGUgL0NhdGFsb2cKPj4KZW5kb2JqCjYgMCBvYmoKPDwKL0F1dGhvciAoXChhbm9ueW1vdXNcKSkgL0NyZWF0aW9uRGF0ZSAoRDoyMDI2MDkyMTIwNDgzOCswMCcwMCcpIC9DcmVhdG9yIChcKHVuc3BlY2lmaWVkXCkpIC9LZXl3b3JkcyAoKSAvTW9kRGF0ZSAoRDoyMDI2MDkyMTIwNDgzOCswMCcwMCcpIC9Qcm9kdWNlciAoUmVwb3J0TGFiIFBERiBMaWJyYXJ5IC0gXChvcGVuc291cmNlXCkpIAogIC9TdWJqZWN0IChcKHVuc3BlY2lmaWVkXCkpIC9UaXRsZSAoXChhbm9ueW1vdXNcKSkgL1RyYXBwZWQgL0ZhbHNlCj4+CmVuZG9iago3IDAgb2JqCjw8Ci9Db3VudCAxIC9LaWRzIFsgNCAwIFIgXSAvVHlwZSAvUGFnZXMKPj4KZW5kb2JqCjggMCBvYmoKPDwKL0ZpbHRlciBbIC9BU0NJSTg1RGVjb2RlIC9GbGF0ZURlY29kZSBdIC9MZW5ndGggMTc0Nwo+PgpzdHJlYW0KR2IhI1xnTiZjUyY6Ti8zb1tCLDNQbjQuU2dZMz5iNCVfck0sSDpCN1YzYG5aQUs1KmIiIWpAYHJBSV5qIlVxWiRYWSNlYFRPSV1oa3BvK2RgPUZESXI+PUpDKDEoO1krPCMoajVjQCJYcVtPQ3JnIyJTYGhlP2hfbCJDUC1iOTJcOT1YSD1mQFJbXChfbVZrWUZKO3UjLihYODJcY01AVV9fayNkam9xbi1VQ0lfaT4zTz4/NkdyYCdmXWM/T24ycEEjK2kwQjxmNFY+JEtDLGpycEBuQEg2X0lYKCJRLTRWJ3IrU25iMmsuO01DWCRNTGgwSkJKM2pqPmsoJG9GZTAnUFxrKTIoPiI0ISZcS0hQcUooaVopcCUhSihSSl1EPDo3M2lAKWgoVF1EIWZKSyExRmA3bXFFX0U4LkA6KygoZGp0KDtwN3VHPVo5JS82ciMxTjlHS1JiUTsuI1pGIS1gMF84Tjc3XCk0XDtNKitVXkpaXlB0YlI8cGomTz05dU8oX0tqYUMiTiFqa1Y6K0d1IjZTclNuIic7WVBFaEo+WW8ibkNvPm8jIk8mJSYvL2taZVcsVWw1MylEKTlYL0c1Wk9CWU1lWmksM3MtMDA0QCF0JS5hcVxCWVZMcyhRMlAqPUApLVlsUm03MFI5OzZhPlk/NSFeYi9xYFYpWithPlMpYFByWjwoNjF1U188ZHUoQjhOcVdFJFUxa1ZcO1hLJGQnWD9bRjNQSmhSOCRFSkxAa1gsaENlPChAIywiPG4kZEduTWcnW3BtJDM5JlBbMVhvYmVvb1ldbGxxQWFtRl5nPipscFgtKFFBQ1NkIktfbC9tMlVvc2dlIkNXT1cnUmNRWV09WWVwXT5BJVBfRSJkJ2FKYCooTTxUL0o+M2hVMF1hS2UmVk9qIS1LQFxDLGF0OFouN01gMVZEV3JOJjkxZz5ONGRxUU5Haihobj1eJSZBaWczSkQ8UzUmJSEscixBUGpMMiNFSkYjOG1ETC41Jj5GakMzTkxBPnUyOjhFc3M/Kic7JmUoYj5XQS88bWNRLidbQEQrOyxubzs8Py9OMDY1SkpAJl02SEU0LV4jXT4hY1BMLSEjalo8JW9VPFJCMGpCciZhKDNIbE5ZaVpRS2VjKlpzdS1AKS5kaEFwQU9EOTAuZFFAdF4/MW1DZ2ZgbFgoYkQlbG91WTpPTyxXcGU6MTpIWF41KjwkbkRvQDxZVy9sKUFvSV1qQTgrRWkzXkxlSEc4XTBIbWlBLS5PJ15gRDM4XVhLaEVQYy1iTCEvbFQkJTI/QkxgJTNlY1FkcVooSTxWc2dJclBTRDBrOFhuSkhcOEZrTlVQVF49TiksdDlIRV9wUzljJTs7U108MSNSRlAuSU5DcmxnLF8rVT1WRzVBWCg4bl8ybUQtJktRcFFrY2VWOFs2MXByMUspVEc5KUtkJHNfU1dxPzRfczNjQF5ZZ0YkPjBSRUZKL14vXj9RRlpsaXE2MTpdLmUrbG0wV1tZYVpIVmQoZWYqISRSRGs5U1wmJHBfLCQuamw0RWVdJlVxVUJAJGZIUCM0MCRRMGtDYiZCXzxON1xpUEcrW19VS2Nna2E2QDE6ViVGYTJGNm5PMWMoYyllLlpJWzc8ciM6dTVCSmUkKTxgJG1DKWMuYXBHVnMmZXRfcGNsN0FfIyYuUXFVWjFfX04yXTUxRF5iWTpMNiE/UG1XRCNsZ1k2U0plc19GSDxfMHBhYHJhYjZhaFsyU2BuSV8nJiZOcylnLUFabkFBSUkhPkZkOCJWNSosbDFZcmZpdFBlYjZvaktZSEtuUyhPNFA1UWc7V1FIRlVJJUFyVkknOidaVlpNQ1pDN2hQcFlCZ0Q8PXVCRlZdJVBzJFI6VCxjQyVvLkE3LC5ALSZgUFFVS0ZCPGN0J0UmIWxDcG4iMCVCKVEnMT9zcl5VN09LS3MkcXAnPllXPyNcXzApPT9XQE8tSzMmb2kvRyY2VmZDLmlHSXJkUWNiZWRIPydyKyVHdHAoUC10TTwnMHI7OEJLPjFYNCteK1xdLC9dcjNrMmBhLXIhSCpZWzZmLEpBdEN0Xz5xVld0XS9gbkAtQ190ZTI3KTVqcUVvJiVmQDJKal0yQz4nPU9GJWBcZTBqcThfUHNmUEpwWEYxWD5PPjRvZGUyREdFaChbZGtzSkwyTFAjNVkwdFUtUTMvOV5WQls3SSNZOiVcRGBuJmM5azUjay5HN1NPNy5NUCg1NCxIX0NRIlpAci8oKD9pJmRuYFNkPD5fPGVkKV08KCNXND5kKjhdbmNQY2daO11QbjEyPmBbLUIvJzMha1tBZHF+PmVuZHN0cmVhbQplbmRvYmoKeHJlZgowIDkKMDAwMDAwMDAwMCA2NTUzNSBmIAowMDAwMDAwMDYxIDAwMDAwIG4gCjAwMDAwMDAxMDIgMDAwMDAgbiAKMDAwMDAwMDIwOSAwMDAwMCBuIAowMDAwMDAwMzIxIDAwMDAwIG4gCjAwMDAwMDA1MjQgMDAwMDAgbiAKMDAwMDAwMDU5MiAwMDAwMCBuIAowMDAwMDAwODcyIDAwMDAwIG4gCjAwMDAwMDA5MzEgMDAwMDAgbiAKdHJhaWxlcgo8PAovSUQgCls8MzcxMmUzMmM3NTk2YjgwNDI4ZjNhZTYzNzg4NThjNDY+PDM3MTJlMzJjNzU5NmI4MDQyOGYzYWU2Mzc4ODU4YzQ2Pl0KJSBSZXBvcnRMYWIgZ2VuZXJhdGVkIFBERiBkb2N1bWVudCAtLSBkaWdlc3QgKG9wZW5zb3VyY2UpCgovSW5mbyA2IDAgUgovUm9vdCA1IDAgUgovU2l6ZSA5Cj4+CnN0YXJ0eHJlZgoyNzY5CiUlRU9GCg==" download="CV_Joao_Victor_Cruz.pdf" data-key="contact-btn-cv" data-href-key="cv-contact">
+            <a class="btn btn-secondary cv-download-link" href="#" download="CV_Joao_Victor_Cruz.pdf" data-key="contact-btn-cv" data-href-key="cv-contact">
               Descargar CV completo
             </a>
             <button type="button" class="href-edit-btn" data-for="cv-contact" title="Cambiar el archivo/enlace del CV">🔗</button>
@@ -1237,12 +1303,12 @@
         <div class="salud-counters">
           <div class="salud-counter">
             <div class="salud-counter-icon">🌍</div>
-            <div class="salud-counter-value" id="counterPopulation">8.252.437.069</div>
+            <div class="salud-counter-value" id="counterPopulation">–</div>
             <div class="salud-counter-label" data-key="salud-counter-population">Población mundial</div>
           </div>
           <div class="salud-counter">
             <div class="salud-counter-icon">👶</div>
-            <div class="salud-counter-value" id="counterBirths">101.454.330</div>
+            <div class="salud-counter-value" id="counterBirths">–</div>
             <div class="salud-counter-label" data-key="salud-counter-births">Nacimientos este año</div>
           </div>
         </div>
@@ -1251,47 +1317,47 @@
         <div class="salud-counters">
           <div class="salud-counter">
             <div class="salud-counter-icon">🕊️</div>
-            <div class="salud-counter-value" id="counterDeaths">44.001.540</div>
+            <div class="salud-counter-value" id="counterDeaths">–</div>
             <div class="salud-counter-label" data-key="salud-counter-deaths">Muertes este año</div>
           </div>
           <div class="salud-counter">
             <div class="salud-counter-icon">🏥</div>
-            <div class="salud-counter-value" id="counterCDeaths">9.379.395</div>
+            <div class="salud-counter-value" id="counterCDeaths">–</div>
             <div class="salud-counter-label" data-key="salud-counter-cdeaths">Muertes por enfermedades transmisibles este año</div>
           </div>
           <div class="salud-counter">
             <div class="salud-counter-icon">🤧</div>
-            <div class="salud-counter-value" id="counterFlu">376.178</div>
+            <div class="salud-counter-value" id="counterFlu">–</div>
             <div class="salud-counter-label" data-key="salud-counter-flu">Muertes por gripe estacional este año</div>
           </div>
           <div class="salud-counter">
             <div class="salud-counter-icon">🧒</div>
-            <div class="salud-counter-value" id="counterUnder5">5.492.213</div>
+            <div class="salud-counter-value" id="counterUnder5">–</div>
             <div class="salud-counter-label" data-key="salud-counter-under5">Muertes de niños menores de 5 años este año</div>
           </div>
           <div class="salud-counter">
             <div class="salud-counter-icon">🤰</div>
-            <div class="salud-counter-value" id="counterMaternal">223.427</div>
+            <div class="salud-counter-value" id="counterMaternal">–</div>
             <div class="salud-counter-label" data-key="salud-counter-maternal">Muertes de madres durante el parto este año</div>
           </div>
           <div class="salud-counter">
             <div class="salud-counter-icon">🎗️</div>
-            <div class="salud-counter-value" id="counterHivPeople">47.645.931</div>
+            <div class="salud-counter-value" id="counterHivPeople">–</div>
             <div class="salud-counter-label" data-key="salud-counter-hivpeople">Personas con VIH/sida</div>
           </div>
           <div class="salud-counter">
             <div class="salud-counter-icon">🎗️</div>
-            <div class="salud-counter-value" id="counterHivDeaths">1.214.716</div>
+            <div class="salud-counter-value" id="counterHivDeaths">–</div>
             <div class="salud-counter-label" data-key="salud-counter-hivdeaths">Muertes causadas por VIH/sida este año</div>
           </div>
           <div class="salud-counter">
             <div class="salud-counter-icon">🩺</div>
-            <div class="salud-counter-value" id="counterCancer">5.934.280</div>
+            <div class="salud-counter-value" id="counterCancer">–</div>
             <div class="salud-counter-label" data-key="salud-counter-cancer">Muertes causadas por cáncer este año</div>
           </div>
           <div class="salud-counter">
             <div class="salud-counter-icon">🦟</div>
-            <div class="salud-counter-value" id="counterMalaria">284.984</div>
+            <div class="salud-counter-value" id="counterMalaria">–</div>
             <div class="salud-counter-label" data-key="salud-counter-malaria">Muertes causadas por malaria este año</div>
           </div>
         </div>
@@ -1300,37 +1366,37 @@
         <div class="salud-counters">
           <div class="salud-counter">
             <div class="salud-counter-icon">🚬</div>
-            <div class="salud-counter-value" id="counterCigarettes">13.650.984.874</div>
+            <div class="salud-counter-value" id="counterCigarettes">–</div>
             <div class="salud-counter-label" data-key="salud-counter-cigarettes">Cigarrillos fumados hoy</div>
           </div>
           <div class="salud-counter">
             <div class="salud-counter-icon">🚭</div>
-            <div class="salud-counter-value" id="counterSmokingDeaths">3.612.002</div>
+            <div class="salud-counter-value" id="counterSmokingDeaths">–</div>
             <div class="salud-counter-label" data-key="salud-counter-smokingdeaths">Muertes causadas por tabaquismo este año</div>
           </div>
           <div class="salud-counter">
             <div class="salud-counter-icon">🍺</div>
-            <div class="salud-counter-value" id="counterAlcoholDeaths">1.807.254</div>
+            <div class="salud-counter-value" id="counterAlcoholDeaths">–</div>
             <div class="salud-counter-label" data-key="salud-counter-alcoholdeaths">Muertes causadas por alcohol este año</div>
           </div>
           <div class="salud-counter">
             <div class="salud-counter-icon">📉</div>
-            <div class="salud-counter-value" id="counterAbortions">32.970.377</div>
+            <div class="salud-counter-value" id="counterAbortions">–</div>
             <div class="salud-counter-label" data-key="salud-counter-abortions">Abortos este año</div>
           </div>
           <div class="salud-counter">
             <div class="salud-counter-icon">💔</div>
-            <div class="salud-counter-value" id="counterSuicides">774.928</div>
+            <div class="salud-counter-value" id="counterSuicides">–</div>
             <div class="salud-counter-label" data-key="salud-counter-suicides">Suicidios este año</div>
           </div>
           <div class="salud-counter">
             <div class="salud-counter-icon">💊</div>
-            <div class="salud-counter-value" id="counterDrugMoney">$289.058.433.675</div>
+            <div class="salud-counter-value" id="counterDrugMoney">–</div>
             <div class="salud-counter-label" data-key="salud-counter-drugmoney">Dinero gastado en drogas ilegales este año</div>
           </div>
           <div class="salud-counter">
             <div class="salud-counter-icon">🚗</div>
-            <div class="salud-counter-value" id="counterRoad">975.329</div>
+            <div class="salud-counter-value" id="counterRoad">–</div>
             <div class="salud-counter-label" data-key="salud-counter-road">Muertes por accidentes de tránsito este año</div>
           </div>
         </div>
@@ -1348,15 +1414,55 @@
     <span data-key="footer-text">© 2026 João Victor Cruz · Medicina &amp; Cardiología Ambulatoria</span><span id="secretIcon" title=" ">·</span>
   </footer>
 
-  
+  <input type="file" id="photoInput" accept="image/*" style="display:none">
 
-  
+  <div class="edit-hint" id="editHint">
+    Estás en <strong>modo edición</strong>. Hacé click en cualquier texto para editarlo, arrastrá certificados o experiencias para reordenarlos, y usá los botones de abajo para guardar los cambios.
+    <button type="button" onclick="this.parentElement.style.display='none'">Entendido</button>
+  </div>
 
-  
+  <div class="edit-toggle-bar">
+    <button type="button" class="edit-toggle-btn secondary" id="downloadBtn">⬇️ Descargar página</button>
+    <button type="button" class="edit-toggle-btn secondary" id="resetBtn">♻️ Restaurar original</button>
+    <button type="button" class="edit-toggle-btn lock-btn" id="lockBtn">🔒 Bloquear</button>
+    <button type="button" class="edit-toggle-btn" id="editToggleBtn">✏️ Editar página</button>
+  </div>
 
   <script>
   (function () {
     var editMode = false;
+
+    /* ---------- descarga del CV (Blob, funciona también en Safari) ---------- */
+    var CV_BASE64 = 'JVBERi0xLjQKJZOMi54gUmVwb3J0TGFiIEdlbmVyYXRlZCBQREYgZG9jdW1lbnQgKG9wZW5zb3VyY2UpCjEgMCBvYmoKPDwKL0YxIDIgMCBSIC9GMiAzIDAgUgo+PgplbmRvYmoKMiAwIG9iago8PAovQmFzZUZvbnQgL0hlbHZldGljYSAvRW5jb2RpbmcgL1dpbkFuc2lFbmNvZGluZyAvTmFtZSAvRjEgL1N1YnR5cGUgL1R5cGUxIC9UeXBlIC9Gb250Cj4+CmVuZG9iagozIDAgb2JqCjw8Ci9CYXNlRm9udCAvSGVsdmV0aWNhLUJvbGQgL0VuY29kaW5nIC9XaW5BbnNpRW5jb2RpbmcgL05hbWUgL0YyIC9TdWJ0eXBlIC9UeXBlMSAvVHlwZSAvRm9udAo+PgplbmRvYmoKNCAwIG9iago8PAovQ29udGVudHMgOCAwIFIgL01lZGlhQm94IFsgMCAwIDU5NS4yNzU2IDg0MS44ODk4IF0gL1BhcmVudCA3IDAgUiAvUmVzb3VyY2VzIDw8Ci9Gb250IDEgMCBSIC9Qcm9jU2V0IFsgL1BERiAvVGV4dCAvSW1hZ2VCIC9JbWFnZUMgL0ltYWdlSSBdCj4+IC9Sb3RhdGUgMCAvVHJhbnMgPDwKCj4+IAogIC9UeXBlIC9QYWdlCj4+CmVuZG9iago1IDAgb2JqCjw8Ci9QYWdlTW9kZSAvVXNlTm9uZSAvUGFnZXMgNyAwIFIgL1R5cGUgL0NhdGFsb2cKPj4KZW5kb2JqCjYgMCBvYmoKPDwKL0F1dGhvciAoXChhbm9ueW1vdXNcKSkgL0NyZWF0aW9uRGF0ZSAoRDoyMDI2MDkyMTIwNDgzOCswMCcwMCcpIC9DcmVhdG9yIChcKHVuc3BlY2lmaWVkXCkpIC9LZXl3b3JkcyAoKSAvTW9kRGF0ZSAoRDoyMDI2MDkyMTIwNDgzOCswMCcwMCcpIC9Qcm9kdWNlciAoUmVwb3J0TGFiIFBERiBMaWJyYXJ5IC0gXChvcGVuc291cmNlXCkpIAogIC9TdWJqZWN0IChcKHVuc3BlY2lmaWVkXCkpIC9UaXRsZSAoXChhbm9ueW1vdXNcKSkgL1RyYXBwZWQgL0ZhbHNlCj4+CmVuZG9iago3IDAgb2JqCjw8Ci9Db3VudCAxIC9LaWRzIFsgNCAwIFIgXSAvVHlwZSAvUGFnZXMKPj4KZW5kb2JqCjggMCBvYmoKPDwKL0ZpbHRlciBbIC9BU0NJSTg1RGVjb2RlIC9GbGF0ZURlY29kZSBdIC9MZW5ndGggMTc0Nwo+PgpzdHJlYW0KR2IhI1xnTiZjUyY6Ti8zb1tCLDNQbjQuU2dZMz5iNCVfck0sSDpCN1YzYG5aQUs1KmIiIWpAYHJBSV5qIlVxWiRYWSNlYFRPSV1oa3BvK2RgPUZESXI+PUpDKDEoO1krPCMoajVjQCJYcVtPQ3JnIyJTYGhlP2hfbCJDUC1iOTJcOT1YSD1mQFJbXChfbVZrWUZKO3UjLihYODJcY01AVV9fayNkam9xbi1VQ0lfaT4zTz4/NkdyYCdmXWM/T24ycEEjK2kwQjxmNFY+JEtDLGpycEBuQEg2X0lYKCJRLTRWJ3IrU25iMmsuO01DWCRNTGgwSkJKM2pqPmsoJG9GZTAnUFxrKTIoPiI0ISZcS0hQcUooaVopcCUhSihSSl1EPDo3M2lAKWgoVF1EIWZKSyExRmA3bXFFX0U4LkA6KygoZGp0KDtwN3VHPVo5JS82ciMxTjlHS1JiUTsuI1pGIS1gMF84Tjc3XCk0XDtNKitVXkpaXlB0YlI8cGomTz05dU8oX0tqYUMiTiFqa1Y6K0d1IjZTclNuIic7WVBFaEo+WW8ibkNvPm8jIk8mJSYvL2taZVcsVWw1MylEKTlYL0c1Wk9CWU1lWmksM3MtMDA0QCF0JS5hcVxCWVZMcyhRMlAqPUApLVlsUm03MFI5OzZhPlk/NSFeYi9xYFYpWithPlMpYFByWjwoNjF1U188ZHUoQjhOcVdFJFUxa1ZcO1hLJGQnWD9bRjNQSmhSOCRFSkxAa1gsaENlPChAIywiPG4kZEduTWcnW3BtJDM5JlBbMVhvYmVvb1ldbGxxQWFtRl5nPipscFgtKFFBQ1NkIktfbC9tMlVvc2dlIkNXT1cnUmNRWV09WWVwXT5BJVBfRSJkJ2FKYCooTTxUL0o+M2hVMF1hS2UmVk9qIS1LQFxDLGF0OFouN01gMVZEV3JOJjkxZz5ONGRxUU5Haihobj1eJSZBaWczSkQ8UzUmJSEscixBUGpMMiNFSkYjOG1ETC41Jj5GakMzTkxBPnUyOjhFc3M/Kic7JmUoYj5XQS88bWNRLidbQEQrOyxubzs8Py9OMDY1SkpAJl02SEU0LV4jXT4hY1BMLSEjalo8JW9VPFJCMGpCciZhKDNIbE5ZaVpRS2VjKlpzdS1AKS5kaEFwQU9EOTAuZFFAdF4/MW1DZ2ZgbFgoYkQlbG91WTpPTyxXcGU6MTpIWF41KjwkbkRvQDxZVy9sKUFvSV1qQTgrRWkzXkxlSEc4XTBIbWlBLS5PJ15gRDM4XVhLaEVQYy1iTCEvbFQkJTI/QkxgJTNlY1FkcVooSTxWc2dJclBTRDBrOFhuSkhcOEZrTlVQVF49TiksdDlIRV9wUzljJTs7U108MSNSRlAuSU5DcmxnLF8rVT1WRzVBWCg4bl8ybUQtJktRcFFrY2VWOFs2MXByMUspVEc5KUtkJHNfU1dxPzRfczNjQF5ZZ0YkPjBSRUZKL14vXj9RRlpsaXE2MTpdLmUrbG0wV1tZYVpIVmQoZWYqISRSRGs5U1wmJHBfLCQuamw0RWVdJlVxVUJAJGZIUCM0MCRRMGtDYiZCXzxON1xpUEcrW19VS2Nna2E2QDE6ViVGYTJGNm5PMWMoYyllLlpJWzc8ciM6dTVCSmUkKTxgJG1DKWMuYXBHVnMmZXRfcGNsN0FfIyYuUXFVWjFfX04yXTUxRF5iWTpMNiE/UG1XRCNsZ1k2U0plc19GSDxfMHBhYHJhYjZhaFsyU2BuSV8nJiZOcylnLUFabkFBSUkhPkZkOCJWNSosbDFZcmZpdFBlYjZvaktZSEtuUyhPNFA1UWc7V1FIRlVJJUFyVkknOidaVlpNQ1pDN2hQcFlCZ0Q8PXVCRlZdJVBzJFI6VCxjQyVvLkE3LC5ALSZgUFFVS0ZCPGN0J0UmIWxDcG4iMCVCKVEnMT9zcl5VN09LS3MkcXAnPllXPyNcXzApPT9XQE8tSzMmb2kvRyY2VmZDLmlHSXJkUWNiZWRIPydyKyVHdHAoUC10TTwnMHI7OEJLPjFYNCteK1xdLC9dcjNrMmBhLXIhSCpZWzZmLEpBdEN0Xz5xVld0XS9gbkAtQ190ZTI3KTVqcUVvJiVmQDJKal0yQz4nPU9GJWBcZTBqcThfUHNmUEpwWEYxWD5PPjRvZGUyREdFaChbZGtzSkwyTFAjNVkwdFUtUTMvOV5WQls3SSNZOiVcRGBuJmM5azUjay5HN1NPNy5NUCg1NCxIX0NRIlpAci8oKD9pJmRuYFNkPD5fPGVkKV08KCNXND5kKjhdbmNQY2daO11QbjEyPmBbLUIvJzMha1tBZHF+PmVuZHN0cmVhbQplbmRvYmoKeHJlZgowIDkKMDAwMDAwMDAwMCA2NTUzNSBmIAowMDAwMDAwMDYxIDAwMDAwIG4gCjAwMDAwMDAxMDIgMDAwMDAgbiAKMDAwMDAwMDIwOSAwMDAwMCBuIAowMDAwMDAwMzIxIDAwMDAwIG4gCjAwMDAwMDA1MjQgMDAwMDAgbiAKMDAwMDAwMDU5MiAwMDAwMCBuIAowMDAwMDAwODcyIDAwMDAwIG4gCjAwMDAwMDA5MzEgMDAwMDAgbiAKdHJhaWxlcgo8PAovSUQgCls8MzcxMmUzMmM3NTk2YjgwNDI4ZjNhZTYzNzg4NThjNDY+PDM3MTJlMzJjNzU5NmI4MDQyOGYzYWU2Mzc4ODU4YzQ2Pl0KJSBSZXBvcnRMYWIgZ2VuZXJhdGVkIFBERiBkb2N1bWVudCAtLSBkaWdlc3QgKG9wZW5zb3VyY2UpCgovSW5mbyA2IDAgUgovUm9vdCA1IDAgUgovU2l6ZSA5Cj4+CnN0YXJ0eHJlZgoyNzY5CiUlRU9GCg==';
+
+    function downloadCV() {
+      try {
+        var byteChars = atob(CV_BASE64);
+        var byteNumbers = new Array(byteChars.length);
+        for (var i = 0; i < byteChars.length; i++) byteNumbers[i] = byteChars.charCodeAt(i);
+        var byteArray = new Uint8Array(byteNumbers);
+        var blob = new Blob([byteArray], { type: 'application/pdf' });
+        var url = URL.createObjectURL(blob);
+        var a = document.createElement('a');
+        a.href = url;
+        a.download = 'CV_Joao_Victor_Cruz.pdf';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        setTimeout(function () { URL.revokeObjectURL(url); }, 4000);
+      } catch (e) {
+        alert('No se pudo generar el PDF. Probá de nuevo o usá otro navegador.');
+      }
+    }
+
+    document.querySelectorAll('.cv-download-link').forEach(function (link) {
+      link.addEventListener('click', function (e) {
+        var href = link.getAttribute('href');
+        if (href && href !== '#') return; // el usuario cambió el enlace por uno propio: dejamos que navegue normal
+        e.preventDefault();
+        downloadCV();
+      });
+    });
 
     function escapeHtml(str) {
       var div = document.createElement('div');
@@ -1420,22 +1526,41 @@
 
     /* ---------- foto de perfil ---------- */
     var profilePhoto = document.getElementById('profilePhoto');
+    var aboutPhoto = document.getElementById('aboutPhoto');
     var photoInput = document.getElementById('photoInput');
+    var currentPhotoTarget = 'hero';
+
+    function applyPhotoTo(el, dataUrl) {
+      el.style.backgroundImage = 'url(' + dataUrl + ')';
+      el.style.backgroundSize = 'cover';
+      el.style.backgroundPosition = 'center';
+      var txt = el.querySelector('.photo-placeholder-text');
+      if (txt) txt.style.display = 'none';
+    }
 
     function applyPhoto(dataUrl) {
-      profilePhoto.style.backgroundImage = 'url(' + dataUrl + ')';
-      profilePhoto.style.backgroundSize = 'cover';
-      profilePhoto.style.backgroundPosition = 'center';
-      var txt = profilePhoto.querySelector('.photo-placeholder-text');
-      if (txt) txt.style.display = 'none';
+      applyPhotoTo(profilePhoto, dataUrl);
     }
 
     var savedPhoto = localStorage.getItem('site:photo');
     if (savedPhoto) applyPhoto(savedPhoto);
 
+    var savedAboutPhoto = localStorage.getItem('site:photo:about');
+    if (savedAboutPhoto && aboutPhoto) applyPhotoTo(aboutPhoto, savedAboutPhoto);
+
     profilePhoto.addEventListener('click', function () {
-      if (editMode) photoInput.click();
+      if (!editMode) return;
+      currentPhotoTarget = 'hero';
+      photoInput.click();
     });
+
+    if (aboutPhoto) {
+      aboutPhoto.addEventListener('click', function () {
+        if (!editMode) return;
+        currentPhotoTarget = 'about';
+        photoInput.click();
+      });
+    }
 
     photoInput.addEventListener('change', function (e) {
       var file = e.target.files[0];
@@ -1446,8 +1571,13 @@
       }
       var reader = new FileReader();
       reader.onload = function (ev) {
-        applyPhoto(ev.target.result);
-        localStorage.setItem('site:photo', ev.target.result);
+        if (currentPhotoTarget === 'about' && aboutPhoto) {
+          applyPhotoTo(aboutPhoto, ev.target.result);
+          localStorage.setItem('site:photo:about', ev.target.result);
+        } else {
+          applyPhoto(ev.target.result);
+          localStorage.setItem('site:photo', ev.target.result);
+        }
       };
       reader.readAsDataURL(file);
     });
